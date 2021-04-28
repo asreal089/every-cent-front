@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { ChartModule } from 'primeng/chart';
+import {TabViewModule} from 'primeng/tabview';
 import { StackedchartComponent } from './stackedchart/stackedchart.component';
 
 
@@ -21,6 +22,7 @@ import { StackedchartComponent } from './stackedchart/stackedchart.component';
   imports: [
     BrowserModule,
     ChartModule,
+    TabViewModule,
     AppRoutingModule
   ],
   providers: [],

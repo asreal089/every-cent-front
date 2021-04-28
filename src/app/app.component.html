@@ -4,14 +4,19 @@
   <app-navbar></app-navbar>
 
   <div class="content">
-      <div class="row">
-        <div class="col-sm">
+
+    <div class="tabviewpanel">
+
+      <p-tabView>
+        <p-tabPanel header="Resumo do Mẽs">
           <app-piechart></app-piechart>
-        </div>
-        <div class="col-sm">
+        </p-tabPanel>
+        <p-tabPanel header="Resumo de Meses antoriores">
           <app-stackedchart></app-stackedchart>
-        </div>
-      </div>
+        </p-tabPanel>
+      </p-tabView>
+
+    </div>
 
 
   </div>
