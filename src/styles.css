@@ -22,6 +22,9 @@
   --primary-default: #ffffff;
   --primary-dark: #000000;
   --primary-light: #b3b3b3;
+  --secudary-default: #7f69fd;
+  --secudary-light: #d1c1ff;
+  --secudary-dark: #6b3aff;
 
   --error-default: #ef3e36;
   --error-dark: #800600;
@@ -34,8 +37,8 @@
 }
 
 .content {
-  width: 100%;
-  height: 600px;
+  min-width: 100%;
+  min-height: 600px;
 }
 
 .navbar {
@@ -61,14 +64,13 @@
 
 .tabviewpanel {
   padding: 10px;
-  align-items: center;
 }
 
 .tabviewpanel li a {
   padding: 10px;
   text-decoration: none;
-  color: var(--primary-dark);
+  color: var(--secudary-default);
 }
 .tabviewpanel li a:hover {
-  color: var(--primary-light);
+  color: var(--secudary-dark);
 }
