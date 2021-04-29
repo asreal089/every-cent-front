@@ -74,3 +74,6 @@
 .tabviewpanel li a:hover {
   color: var(--secudary-dark);
 }
+.card th {
+  background-color: var(--primary-light);
+}

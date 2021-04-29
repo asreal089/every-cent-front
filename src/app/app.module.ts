@@ -9,6 +9,11 @@ import { PiechartComponent } from './piechart/piechart.component';
 import { ChartModule } from 'primeng/chart';
 import {TabViewModule} from 'primeng/tabview';
 import { StackedchartComponent } from './stackedchart/stackedchart.component';
+import { EventlistComponent } from './eventlist/eventlist.component';
+import {TableModule} from 'primeng/table';
+import { ProductService } from './eventlist/productservice';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -17,15 +22,18 @@ import { StackedchartComponent } from './stackedchart/stackedchart.component';
     NavbarComponent,
     FooterComponent,
     PiechartComponent,
-    StackedchartComponent
+    StackedchartComponent,
+    EventlistComponent
   ],
   imports: [
     BrowserModule,
     ChartModule,
+    HttpClientModule,
     TabViewModule,
+    TableModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
