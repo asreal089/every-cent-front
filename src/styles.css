@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code");
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/primeng.min.css";
 
 * {
-  font-family: Fira-Code !important;
+  font-family: Fira-Code;
 }
 
 :root {
@@ -61,7 +63,7 @@
 .card-footer p {
   color: var(--primary-default);
 }
-
+/*
 .tabviewpanel {
   padding: 10px;
 }
@@ -77,3 +79,4 @@
 .card th {
   background-color: var(--primary-light);
 }
+*/

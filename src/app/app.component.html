@@ -5,23 +5,7 @@
 
   <div class="content">
 
-    <div class="tabviewpanel">
-
-      <p-tabView>
-        <p-tabPanel header="Resumo do Mẽs">
-          <app-piechart></app-piechart>
-        </p-tabPanel>
-        <p-tabPanel header="Resumo de Meses antoriores">
-          <app-stackedchart></app-stackedchart>
-        </p-tabPanel>
-      </p-tabView>
-
-    </div>
-
-    <app-eventlist></app-eventlist>
-
+    <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
 </div>
-
-<router-outlet></router-outlet>
