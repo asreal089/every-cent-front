@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingpageComponent } from './landingpage/landingpage.component';
+import { LancamentoComponent } from './lancamento/lancamento.component';
+import { OrcamentoComponent } from './orcamento/orcamento.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -29,7 +32,10 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
     PiechartComponent,
     StackedchartComponent,
     EventlistComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    LancamentoComponent,
+    OrcamentoComponent,
+    DashboardComponent
 
   ],
   imports: [
@@ -37,8 +43,10 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
     BrowserAnimationsModule,
     ChartModule,
     RouterModule.forRoot([
-      {path: 'lista-gastos', component: EventlistComponent},
+      {path: 'dashboard', component: DashboardComponent},
       {path: '', component: LandingpageComponent},
+      {path: 'lancamento', component: DashboardComponent},
+      {path: 'orcamento', component: OrcamentoComponent}
     ]),
     HttpClientModule,
     TabViewModule,
