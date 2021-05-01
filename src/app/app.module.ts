@@ -45,7 +45,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RouterModule.forRoot([
       {path: 'dashboard', component: DashboardComponent},
       {path: '', component: LandingpageComponent},
-      {path: 'lancamento', component: DashboardComponent},
+      {path: 'lancamento', component: LancamentoComponent},
       {path: 'orcamento', component: OrcamentoComponent}
     ]),
     HttpClientModule,

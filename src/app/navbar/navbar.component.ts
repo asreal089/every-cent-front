@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MenuItem, PrimeIcons} from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',

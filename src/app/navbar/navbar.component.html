@@ -1,19 +1,31 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a routerLink="/"><i class="pi pi-home"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
 
-      <div class="col-9">
 
-        <a class="navbar-brand"  routerLink="/"><img src="../../assets/purplecoin.png" alt="" width="30" height="24"></a>
-        <a routerLink="/dashboard">dashboard</a>
-        <a routerLink="/orcamento">Orcamento</a>
-        <a routerLink="/lancamento">Inserir Gasto</a>
+          <li class="nav-item">
+            <a routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/orcamento">Orcamento</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/lancamento">Lançamento</a>
+          </li>
 
-      </div>
-      <div class="col-3">
-        <a routerLink="/api/auth/google">Log With Google</a>
-      </div>
+
+          <li class="nav-item" >
+            <a routerLink="/api/auth/google">Log With Google
+              <i class="pi pi-sign-in"></i>
+            </a>
+          </li>
+      </ul>
     </div>
-
   </div>
 </nav>
