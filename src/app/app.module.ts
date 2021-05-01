@@ -13,6 +13,8 @@ import { EventlistComponent } from './eventlist/eventlist.component';
 import {TableModule} from 'primeng/table';
 import { ProductService } from './eventlist/productservice';
 import { HttpClientModule } from '@angular/common/http';
+import {ButtonModule} from 'primeng/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -27,10 +29,12 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ChartModule,
     HttpClientModule,
     TabViewModule,
     TableModule,
+    ButtonModule,
     AppRoutingModule
   ],
   providers: [ProductService],
