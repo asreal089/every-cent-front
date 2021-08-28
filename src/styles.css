@@ -46,6 +46,7 @@
 .navbar {
   background-color: var(--background-default) !important;
   min-height: 60px;
+  width: 100%;
 }
 .navbar a {
   color: var(--primary-default);
@@ -56,6 +57,12 @@
 .navbar a:hover {
   color: var(--primary-light);
   padding: 5px;
+}
+.navbar-nav-left{
+  width: 80%;
+}
+.navbar-nav-right{
+  align-items:right;
 }
 
 .card-footer {
