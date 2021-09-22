@@ -21,6 +21,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LancamentoComponent } from './lancamento/lancamento.component';
 import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 
 
@@ -35,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LandingpageComponent,
     LancamentoComponent,
     OrcamentoComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginFormComponent
 
   ],
   imports: [
@@ -46,7 +48,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       {path: 'dashboard', component: DashboardComponent},
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent},
-      {path: 'orcamento', component: OrcamentoComponent}
+      {path: 'orcamento', component: OrcamentoComponent},
+      {path: 'login', component: LoginFormComponent}
     ]),
     HttpClientModule,
     TabViewModule,

@@ -71,6 +71,10 @@
 .card-footer p {
   color: var(--primary-default);
 }
+.btn-primary{
+  color: var(--background-light)!important;
+  background-color: var(--background-default)!important;
+}
 /*
 .tabviewpanel {
   padding: 10px;
