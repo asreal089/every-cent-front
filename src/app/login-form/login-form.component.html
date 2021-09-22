@@ -4,15 +4,16 @@
 </div>
 <div class="d-flex justify-content-center">
 
-  <form (ngSubmit)="salvar()">
+  <form #loginForm="ngForm" (ngSubmit)="salvar()">
       <div class="form-group">
-        <label for="">Email</label>
+        <label for="" >Email</label>
         <input type="text" name="email">
       </div>
       <div class="form-group">
         <label for="">Senha</label>
         <input type="password" name="password">
       </div>
+      <p class="d-flex justify-content-center">É novo aqui? <a routerLink="/signin">Se Cadastre Aqui</a> </p>
       <div class="form-group d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">Enviar</button>
       </div>

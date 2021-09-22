@@ -11,12 +11,13 @@ import { NgForm } from '@angular/forms';
 export class LoginFormComponent implements OnInit {
 
   constructor() { }
-
-  model = new Cadastro("email", "password");
-  salvar(){
-    console.log("salvando");
-  }
+  
+  //model = new Cadastro("email", "password");
+  
   ngOnInit(): void {
   }
 
+  salvar(){
+    console.log("salvando");
+  }
 }

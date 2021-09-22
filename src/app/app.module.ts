@@ -22,6 +22,7 @@ import { LancamentoComponent } from './lancamento/lancamento.component';
 import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -51,6 +52,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
       {path: 'orcamento', component: OrcamentoComponent},
       {path: 'login', component: LoginFormComponent}
     ]),
+    FormsModule,
     HttpClientModule,
     TabViewModule,
     TableModule,
