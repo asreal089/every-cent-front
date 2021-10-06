@@ -23,6 +23,8 @@ import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -38,7 +40,9 @@ import { FormsModule } from '@angular/forms';
     LancamentoComponent,
     OrcamentoComponent,
     DashboardComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LoginComponent,
+    RegisterComponent
 
   ],
   imports: [
@@ -50,7 +54,8 @@ import { FormsModule } from '@angular/forms';
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent},
       {path: 'orcamento', component: OrcamentoComponent},
-      {path: 'login', component: LoginFormComponent}
+      {path: 'login', component: LoginFormComponent},
+      {path: 'signin', component: RegisterComponent}
     ]),
     FormsModule,
     HttpClientModule,
