@@ -54,7 +54,7 @@ import { RegisterComponent } from './register/register.component';
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent},
       {path: 'orcamento', component: OrcamentoComponent},
-      {path: 'login', component: LoginFormComponent},
+      {path: 'login', component: LoginComponent},
       {path: 'signin', component: RegisterComponent}
     ]),
     FormsModule,
