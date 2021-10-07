@@ -9,13 +9,13 @@
       <ul class="navbar-nav navbar-nav-left">
 
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn">
             <a routerLink="/dashboard">Dashboard</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn">
             <a routerLink="/orcamento">Orcamento</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn">
             <a routerLink="/lancamento">Lançamento</a>
           </li>
 

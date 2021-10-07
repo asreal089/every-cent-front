@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem, PrimeIcons} from 'primeng/api';
+import { TokenStorageService } from '../_services/token-storage-service.service.spec';
+import { UserService } from '../_services/user.service';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +12,19 @@ import {MenuItem, PrimeIcons} from 'primeng/api';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  currentUser: any;
+
+  constructor(private tokenStorage: TokenStorageService, private userService: UserService) {}
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.currentUser = this.tokenStorage.getUser();
+    }
+    
   }
 
 }
