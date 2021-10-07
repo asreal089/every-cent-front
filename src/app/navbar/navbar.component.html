@@ -24,9 +24,14 @@
 
       <ul class="navbar-nav navbar-nav-right">
 
-          <li class="nav-item" >
+          <li class="nav-item" *ngIf="!isLoggedIn">
             <a routerLink="/login">Login
               <i class="pi pi-sign-in"></i>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a (click)="logout()">Logout
+              <i class="pi pi-sign-out"></i>
             </a>
           </li>
       </ul>
