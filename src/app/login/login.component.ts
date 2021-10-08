@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppConstants } from '../app.constants';
 import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage-service.service';
+import { TokenStorageService, User } from '../_services/token-storage-service.service';
 import { UserService } from '../_services/user.service';
 
 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     );
   }
  
-  login(user:any): void {
+  login(user:User): void {
     this.tokenStorage.saveUser(user);
     this.isLoginFailed = false;
     this.isLoggedIn = true;
