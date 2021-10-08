@@ -25,6 +25,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -50,7 +51,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     ChartModule,
     RouterModule.forRoot([
-      {path: 'dashboard', component: DashboardComponent},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent},
       {path: 'orcamento', component: OrcamentoComponent},

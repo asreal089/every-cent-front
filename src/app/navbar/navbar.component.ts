@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem, PrimeIcons} from 'primeng/api';
-import { TokenStorageService } from '../_services/token-storage-service.service.spec';
+import { TokenStorageService } from '../_services/token-storage-service.service';
 import { UserService } from '../_services/user.service';
 
 
@@ -24,7 +24,9 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
     }
-    
+    console.log("olar esse é o usuario: " + this.currentUser)
+    console.log("olar esse é o role: " + this.currentUser)
+
   }
 
   logout(): void {
