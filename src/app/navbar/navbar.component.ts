@@ -24,9 +24,7 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
     }
-    console.log("olar esse é o usuario: " + this.currentUser)
-    console.log("olar esse é o role: " + this.currentUser)
-
+    
   }
 
   logout(): void {

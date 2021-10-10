@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
+import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.component';
 
 
 
@@ -43,7 +44,8 @@ import { AuthGuard } from './auth.guard';
     DashboardComponent,
     LoginFormComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrcamentoNovoComponent
 
   ],
   imports: [
@@ -54,7 +56,8 @@ import { AuthGuard } from './auth.guard';
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent},
-      {path: 'orcamento', component: OrcamentoComponent},
+      {path: 'orcamento', component: OrcamentoComponent, canActivate: [AuthGuard]},
+      {path: 'orcamento/novo', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'login', component: LoginComponent},
       {path: 'signin', component: RegisterComponent}
     ]),
