@@ -21,7 +21,6 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LancamentoComponent } from './lancamento/lancamento.component';
 import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -42,7 +41,6 @@ import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.componen
     LancamentoComponent,
     OrcamentoComponent,
     DashboardComponent,
-    LoginFormComponent,
     LoginComponent,
     RegisterComponent,
     OrcamentoNovoComponent
