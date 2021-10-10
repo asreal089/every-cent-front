@@ -28,7 +28,7 @@ export class OrcamentoNovoComponent implements OnInit {
       (err:any) => {
         return [];
       }
-      );
+    );
   }
 
   setTipos(data: TipoLancamento[]){

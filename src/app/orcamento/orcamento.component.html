@@ -1,1 +1,6 @@
-<p>orcamento works!</p>
+<table *ngIf="orcamentos">
+    <tr *ngFor="let orcamento of orcamentos">
+        <td><h1>{{orcamento.tipo}}</h1></td>
+        <td><h1>{{orcamento.valor}}</h1></td>
+    </tr>
+</table>
