@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoLancamento } from '../models/TipoLancamento';
+import { OrcamentoService } from '../_services/orcamento.service';
+import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
+import { TokenStorageService } from '../_services/token-storage-service.service';
 
 @Component({
   selector: 'app-orcamento-novo',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrcamentoNovoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
+
+  tipoLancamento = {} as TipoLancamento;
+  tipos: TipoLancamento[] = [];
 
   ngOnInit(): void {
+    const tiposDeLancamento = this.tipoLancamentoSerive.getTipos();
+    console.log("olar")
+    console.log(tiposDeLancamento);
   }
 
 }
