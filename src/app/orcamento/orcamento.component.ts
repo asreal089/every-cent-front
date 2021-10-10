@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
+import {TableModule} from 'primeng/table';
+import {MenuItem, PrimeIcons} from 'primeng/api';
 
 @Component({
   selector: 'app-orcamento',

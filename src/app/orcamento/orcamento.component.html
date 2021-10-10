@@ -1,6 +1,20 @@
-<table *ngIf="orcamentos">
-    <tr *ngFor="let orcamento of orcamentos">
-        <td><h1>{{orcamento.tipo}}</h1></td>
-        <td><h1>{{orcamento.valor}}</h1></td>
-    </tr>
-</table>
+
+<p-table [value]="orcamentos">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Tipo de Gasto</th>
+            <th>Valor Limite</th>
+            <th>Ações</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-orcamento>
+        <tr>
+            <td>{{orcamento.tipo}}</td>
+            <td>{{orcamento.valor}}</td>
+            <td>
+                <i class="pi pi-trash" style="font-size: 1rem"></i> 
+                <i class="pi pi-pencil" style="font-size: 1rem"></i>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
