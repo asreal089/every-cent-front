@@ -11,15 +11,28 @@ import { TokenStorageService } from '../_services/token-storage-service.service'
 })
 export class OrcamentoNovoComponent implements OnInit {
 
+  tipoLancamento = {} as TipoLancamento;
+  tipos: TipoLancamento[] =[];
+  data: any;
+
   constructor(private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
 
-  tipoLancamento = {} as TipoLancamento;
-  tipos: TipoLancamento[] = [];
 
   ngOnInit(): void {
-    const tiposDeLancamento = this.tipoLancamentoSerive.getTipos();
-    console.log("olar")
-    console.log(tiposDeLancamento);
+    
+    this.tipoLancamentoSerive.getTipos().subscribe(
+      (data:TipoLancamento[]) => {
+        this.setTipos(data);
+        return data
+      },
+      (err:any) => {
+        return [];
+      }
+      );
+  }
+
+  setTipos(data: TipoLancamento[]){
+    this.tipos = data;
   }
 
 }
