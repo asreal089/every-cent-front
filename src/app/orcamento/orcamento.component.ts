@@ -13,6 +13,8 @@ import {MenuItem, PrimeIcons} from 'primeng/api';
 export class OrcamentoComponent implements OnInit {
   currentUser:any;
   orcamentos: OrcamentoResponseDTO[]=[];
+  gastos:OrcamentoResponseDTO[]=[];
+  receitas: OrcamentoResponseDTO[]=[];
   constructor(private orcamentoService: OrcamentoService, private tokenStorage: TokenStorageService) {}
 
   async ngOnInit(): Promise<void> {
@@ -30,6 +32,8 @@ export class OrcamentoComponent implements OnInit {
   }
   setOrcamentos(data: OrcamentoResponseDTO[]) {
     this.orcamentos = data;
+    this.receitas = data.filter(o => o.is_renda === true);
+    this.gastos = data.filter(o=>o.is_renda===false);
   }
   
 
