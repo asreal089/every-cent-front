@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { FormBuilder, NgForm } from "@angular/forms";
 import { TipoLancamento } from '../models/TipoLancamento';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
+import { Orcamento } from '../models/Orcamento';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-orcamento-novo',
@@ -13,9 +19,11 @@ export class OrcamentoNovoComponent implements OnInit {
 
   tipoLancamento = {} as TipoLancamento;
   tipos: TipoLancamento[] =[];
+  selectedTipo: TipoLancamento = {id:1, tipo:"salário", isRenda:true}
   data: any;
+  orcamento!: Orcamento;
 
-  constructor(private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
+  constructor(private fb:FormBuilder,private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
 
 
   ngOnInit(): void {
@@ -33,6 +41,18 @@ export class OrcamentoNovoComponent implements OnInit {
 
   setTipos(data: TipoLancamento[]){
     this.tipos = data;
+  }
+
+  changeTipo(e:Event){
+
+  }
+
+  registrationForm = this.fb.group({
+     tipo: {id:1, tipo:"salário", isRenda:true}
+  })
+
+  salvar(f:NgForm){
+    console.log(f)
   }
 
 }

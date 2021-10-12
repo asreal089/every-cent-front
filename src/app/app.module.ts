@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormBuilder } from '@angular/forms';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
@@ -66,7 +69,7 @@ import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.componen
     ButtonModule,
     AppRoutingModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
