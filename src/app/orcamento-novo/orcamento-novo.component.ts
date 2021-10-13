@@ -26,13 +26,16 @@ export class OrcamentoNovoComponent implements OnInit {
   tiposGasto: TipoLancamento[] =[];
   selectedTipo: TipoLancamento = {id:1, tipo:"salário", isRenda:true}
   data: any;
-  orcamento!: Orcamento;
+  orcamento: Orcamento= {tipoID:0, userID:0, valor_maximo: 0};
+  user: any;
 
   constructor(private fb:FormBuilder,private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
 
 
   ngOnInit(): void {
-    
+    this.user = this.tokenService.getUser();
+    this.orcamento.userID = this.user.id;
+
     this.tipoLancamentoSerive.getTipos().subscribe(
       (data:TipoLancamento[]) => {
         this.setTipos(data);
@@ -54,7 +57,7 @@ export class OrcamentoNovoComponent implements OnInit {
 
   }
 
-  onChangeTipo(e:Event){
+  onChangeTipoClassificacao(e:Event){
     if(e)
       this.tipos = this.tiposRenda;
     else
@@ -66,8 +69,8 @@ export class OrcamentoNovoComponent implements OnInit {
      tipo: {id:1, tipo:"salário", isRenda:true}
   })
 
-  salvar(f:NgForm){
-    console.log(f)
+  salvar(){
+    console.log(this.orcamento)
   }
 
 }

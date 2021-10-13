@@ -1,21 +1,21 @@
 <div class="col-md-12">
     
-        <form #orcamentoForm="ngForm" (ngSubmit)="salvar(orcamentoForm)">
+        <form #orcamentoForm="ngForm" (ngSubmit)="salvar()">
             
             <div class="form-group">
-                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (ngModelChange)="onChangeTipo($event)"></p-selectButton>
+                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (ngModelChange)="onChangeTipoClassificacao($event)"></p-selectButton>
             </div>
             
             <div class="form-group">
                 <label class="form-control-label">Tipo de Gasto ou Renda</label> <br />
-                <select class="form-control" name="form-control" name="tipo" ngModel>
-                    <option *ngFor="let tipo of tipos" value="{[tipo.id}}">{{tipo.tipo}}</option>
+                <select class="form-control" name="form-control" name="tipo" [(ngModel)]="orcamento.tipoID">
+                    <option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.tipo}}</option>
                 </select>
             </div>
             
             <div class="form-group">
                 <label class="form-control-label">Valor limite ou esperado</label> <br />
-                <input type="number" class="form-control">
+                <input type="number" class="form-control" [(ngModel)]="orcamento.valor_maximo">
             </div>
             
             <button type="submit" class="btn btn-primary btn-block">Salvar</button>
