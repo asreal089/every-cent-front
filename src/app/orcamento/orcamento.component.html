@@ -11,8 +11,9 @@
             <td>{{receita.tipo}}</td>
             <td>{{receita.valor}}</td>
             <td>
-                <i class="pi pi-trash" style="font-size: 1rem"></i> 
-                <i class="pi pi-pencil" style="font-size: 1rem"></i>
+                <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.id)"></button>
+               
+                <button class="btn pi pi-pencil" style="font-size: 1rem"></button>
             </td>
         </tr>
     </ng-template>
@@ -31,8 +32,9 @@
             <td>{{gasto.tipo}}</td>
             <td>{{gasto.valor}}</td>
             <td>
-                <i class="pi pi-trash" style="font-size: 1rem"></i> 
-                <i class="pi pi-pencil" style="font-size: 1rem"></i>
+                <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.id)"></button>
+               
+                <button class="btn pi pi-pencil" style="font-size: 1rem"></button>
             </td>
         </tr>
     </ng-template>

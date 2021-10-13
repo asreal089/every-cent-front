@@ -70,7 +70,13 @@ export class OrcamentoNovoComponent implements OnInit {
   })
 
   salvar(){
-    console.log(this.orcamento)
+    this.orcamentoService.postOrcamentos(this.orcamento).subscribe(res => {     
+      console.log(res);
+    }, err => {               
+      console.log(err);
+    });
+    console.log("salvando...");
+    console.log(this.orcamento);
   }
 
 }

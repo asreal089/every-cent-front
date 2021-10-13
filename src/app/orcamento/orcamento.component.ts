@@ -35,6 +35,14 @@ export class OrcamentoComponent implements OnInit {
     this.receitas = data.filter(o => o.is_renda === true);
     this.gastos = data.filter(o=>o.is_renda===false);
   }
-  
+
+  async delete(orcamentoID:any){
+    await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {     
+      console.log(res);
+    }, err => {               
+      console.log(err);
+    });
+    window.location.reload();
+  }
 
 }
