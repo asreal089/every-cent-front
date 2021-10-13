@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.component';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 
@@ -67,6 +68,7 @@ import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.componen
     TabViewModule,
     TableModule,
     ButtonModule,
+    SelectButtonModule,
     AppRoutingModule
   ],
   providers: [ProductService, FormBuilder],

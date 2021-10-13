@@ -6,6 +6,7 @@ import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { Orcamento } from '../models/Orcamento';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,8 @@ import { Orcamento } from '../models/Orcamento';
 })
 export class OrcamentoNovoComponent implements OnInit {
 
+  stateOptions: any = [{label: 'Gasto', value: false}, {label: 'Renda', value: true}];
+  value1: string = "Gasto";
   tipoLancamento = {} as TipoLancamento;
   tipos: TipoLancamento[] =[];
   selectedTipo: TipoLancamento = {id:1, tipo:"salário", isRenda:true}

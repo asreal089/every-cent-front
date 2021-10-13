@@ -1,17 +1,24 @@
-<p>orcamento-novo works!</p>
-<form #orcamentoForm="ngForm" (ngSubmit)="salvar(orcamentoForm)">
+<div class="col-md-12">
+    
+        <form #orcamentoForm="ngForm" (ngSubmit)="salvar(orcamentoForm)">
+            
+            <div class="form-group">
+                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value"></p-selectButton>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-control-label">Tipo de Gasto ou Renda</label> <br />
+                <select class="form-control" name="form-control" name="tipo" ngModel>
+                    <option *ngFor="let tipo of tipos" value="{[tipo.id}}">{{tipo.tipo}}</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-control-label">Valor limite ou esperado</label> <br />
+                <input type="number" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+        </form>
 
-    <div class="form-group">
-        <label class="form-control-label">Tipo de Gasto ou Renda</label>
-        <select name="form-control" name="tipo" ngModel>
-            <option *ngFor="let tipo of tipos" value="{[tipo.id}}">{{tipo.tipo}}</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label class="form-control-label">Valor limite ou esperado</label>
-        <input type="number">
-    </div>
-
-    <button type="submit">Salvar</button>
-</form>
+</div>
