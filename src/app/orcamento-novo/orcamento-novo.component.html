@@ -3,7 +3,7 @@
         <form #orcamentoForm="ngForm" (ngSubmit)="salvar(orcamentoForm)">
             
             <div class="form-group">
-                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value"></p-selectButton>
+                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (ngModelChange)="onChangeTipo($event)"></p-selectButton>
             </div>
             
             <div class="form-group">

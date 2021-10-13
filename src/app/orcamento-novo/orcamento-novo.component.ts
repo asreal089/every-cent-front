@@ -22,6 +22,8 @@ export class OrcamentoNovoComponent implements OnInit {
   value1: string = "Gasto";
   tipoLancamento = {} as TipoLancamento;
   tipos: TipoLancamento[] =[];
+  tiposRenda: TipoLancamento[] =[];
+  tiposGasto: TipoLancamento[] =[];
   selectedTipo: TipoLancamento = {id:1, tipo:"salário", isRenda:true}
   data: any;
   orcamento!: Orcamento;
@@ -43,11 +45,21 @@ export class OrcamentoNovoComponent implements OnInit {
   }
 
   setTipos(data: TipoLancamento[]){
+    this.tiposRenda = data.filter(o => o.isRenda === true);
+    this.tiposGasto = data.filter(o => o.isRenda === false);
     this.tipos = data;
   }
 
   changeTipo(e:Event){
 
+  }
+
+  onChangeTipo(e:Event){
+    if(e)
+      this.tipos = this.tiposRenda;
+    else
+      this.tipos = this.tiposGasto;
+  
   }
 
   registrationForm = this.fb.group({
