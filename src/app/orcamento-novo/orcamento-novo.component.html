@@ -1,9 +1,11 @@
+<br />
+<br />
 <div class="col-md-12">
     
         <form #orcamentoForm="ngForm" (ngSubmit)="salvar()">
             
             <div class="form-group">
-                <p-selectButton  [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (ngModelChange)="onChangeTipoClassificacao($event)"></p-selectButton>
+                <p-selectButton class="text-center" [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (ngModelChange)="onChangeTipoClassificacao($event)"></p-selectButton>
             </div>
             
             <div class="form-group">
