@@ -1,10 +1,12 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { FormBuilder, NgForm } from "@angular/forms";
 import { TipoLancamento } from '../models/TipoLancamento';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { Orcamento } from '../models/Orcamento';
+import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 
 
 @Injectable({
@@ -28,13 +30,27 @@ export class OrcamentoNovoComponent implements OnInit {
   data: any;
   orcamento: Orcamento= {tipoID:0, userID:0, valor_maximo: 0};
   user: any;
+  orcamentoID:number = 0;
 
-  constructor(private fb:FormBuilder,private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
+  constructor(private route: ActivatedRoute, private router:Router,private fb:FormBuilder,private tipoLancamentoSerive: TipoLancamentoService, private orcamentoService: OrcamentoService, private tokenService:TokenStorageService) {}
 
 
   ngOnInit(): void {
+
+    this.route.params.subscribe((params: Params) => this.orcamentoID = params['orcamentoID']);
+
+    console.log(this.orcamentoID);
     this.user = this.tokenService.getUser();
     this.orcamento.userID = this.user.id;
+
+    if(this.orcamentoID != 0 ){
+      this.orcamentoService.getOrcamentoByID(this.user.id, this.orcamentoID).subscribe((data:OrcamentoResponseDTO)=>{
+        console.log(data)
+        this.orcamento.tipoID = data.tipo_id;
+        this.orcamento.valor_maximo= data.valor;
+      });
+    }
+
 
     this.tipoLancamentoSerive.getTipos().subscribe(
       (data:TipoLancamento[]) => {
@@ -53,15 +69,15 @@ export class OrcamentoNovoComponent implements OnInit {
     this.tipos = data;
   }
 
-  changeTipo(e:Event){
-
-  }
-
   onChangeTipoClassificacao(e:Event){
-    if(e)
+    if(e){
       this.tipos = this.tiposRenda;
-    else
+      this.orcamento.tipoID = this.tiposRenda[0].id;
+    }
+    else{
       this.tipos = this.tiposGasto;
+      this.orcamento.tipoID = this.tiposGasto[0].id;
+    }
   
   }
 
@@ -70,13 +86,24 @@ export class OrcamentoNovoComponent implements OnInit {
   })
 
   salvar(){
-    this.orcamentoService.postOrcamentos(this.orcamento).subscribe(res => {     
-      console.log(res);
-    }, err => {               
-      console.log(err);
-    });
-    console.log("salvando...");
-    console.log(this.orcamento);
+    if(this.orcamentoID == 0){
+      this.orcamentoService.postOrcamentos(this.orcamento).subscribe(res => {     
+        this.router.navigate(['/orcamento']);
+      }, err => {
+        console.log(this.orcamento);               
+        console.log(err);
+      });
+    }else{
+      this.orcamentoService.patchOrcamentos(this.orcamento, this.orcamentoID).subscribe((res)=>{
+        this.router.navigate(['/orcamento']);
+      },err =>{
+        console.log(this.orcamento);               
+        console.log(err);
+      });
+    }
+
+
+
   }
 
 }

@@ -20,8 +20,8 @@ export class OrcamentoService {
     return this.http.get<OrcamentoResponseDTO[]>(AppConstants.ORCAMENTO_URL + '/'+userID, httpOptions);
   }
 
-  getOrcamentoByID(userID:number, orcamentoID:number): Observable<OrcamentoResponseDTO[]> {
-    return this.http.get<OrcamentoResponseDTO[]>(AppConstants.ORCAMENTO_URL + '/'+userID+'/'+orcamentoID, httpOptions);
+  getOrcamentoByID(userID:number, orcamentoID:number): Observable<OrcamentoResponseDTO> {
+    return this.http.get<OrcamentoResponseDTO>(AppConstants.ORCAMENTO_URL + '/'+userID+'/'+orcamentoID, httpOptions);
   }
  
   postOrcamentos(orcamento:Orcamento): Observable<OrcamentoResponseDTO> {

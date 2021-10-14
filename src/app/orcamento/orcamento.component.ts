@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
+import { Router } from '@angular/router';
 import {TableModule} from 'primeng/table';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 
@@ -13,9 +14,10 @@ import {MenuItem, PrimeIcons} from 'primeng/api';
 export class OrcamentoComponent implements OnInit {
   currentUser:any;
   orcamentos: OrcamentoResponseDTO[]=[];
+  data: OrcamentoResponseDTO[] = [];
   gastos:OrcamentoResponseDTO[]=[];
   receitas: OrcamentoResponseDTO[]=[];
-  constructor(private orcamentoService: OrcamentoService, private tokenStorage: TokenStorageService) {}
+  constructor(private router:Router,private orcamentoService: OrcamentoService, private tokenStorage: TokenStorageService) {}
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
@@ -38,11 +40,21 @@ export class OrcamentoComponent implements OnInit {
 
   async delete(orcamentoID:any){
     await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {     
-      console.log(res);
+      this.orcamentos = this.orcamentos.filter(o => o.id != orcamentoID);
+      this.receitas = this.orcamentos.filter(o => o.is_renda === true);
+      this.gastos = this.orcamentos.filter(o=>o.is_renda===false);
     }, err => {               
       console.log(err);
     });
-    window.location.reload();
+    
+  }
+
+  novoRegistro(){
+    this.router.navigate(['/orcamento/novo']);
+  }
+
+  editRegistro  (orcamentoID:number){
+    this.router.navigate(['/orcamento/novo/'+orcamentoID]);
   }
 
 }

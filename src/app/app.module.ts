@@ -60,6 +60,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
       {path: 'lancamento', component: LancamentoComponent},
       {path: 'orcamento', component: OrcamentoComponent, canActivate: [AuthGuard]},
       {path: 'orcamento/novo', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
+      {path: 'orcamento/novo/:orcamentoID', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'login', component: LoginComponent},
       {path: 'signin', component: RegisterComponent}
     ]),

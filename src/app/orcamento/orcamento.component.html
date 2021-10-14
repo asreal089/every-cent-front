@@ -1,3 +1,8 @@
+<br />
+<br />
+    <button class="btn btn-primary btn-block" (click)="novoRegistro()">Novo Registro</button>
+<br />
+<br />
 <p-table [value]="receitas">
     <ng-template pTemplate="header">
         <tr>
@@ -13,7 +18,7 @@
             <td>
                 <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.id)"></button>
                
-                <button class="btn pi pi-pencil" style="font-size: 1rem"></button>
+                <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(receita.id)"></button>
             </td>
         </tr>
     </ng-template>
@@ -34,7 +39,7 @@
             <td>
                 <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.id)"></button>
                
-                <button class="btn pi pi-pencil" style="font-size: 1rem"></button>
+                <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(gasto.id)"></button>
             </td>
         </tr>
     </ng-template>
