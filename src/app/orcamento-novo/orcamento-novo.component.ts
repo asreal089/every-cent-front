@@ -43,7 +43,7 @@ export class OrcamentoNovoComponent implements OnInit {
     this.user = this.tokenService.getUser();
     this.orcamento.userID = this.user.id;
 
-    if(this.orcamentoID != 0 ){
+    if(this.orcamentoID === undefined || this.orcamentoID === null || this.orcamentoID === 0){
       this.orcamentoService.getOrcamentoByID(this.user.id, this.orcamentoID).subscribe((data:OrcamentoResponseDTO)=>{
         console.log(data)
         this.orcamento.tipoID = data.tipo_id;
@@ -73,8 +73,7 @@ export class OrcamentoNovoComponent implements OnInit {
     if(e){
       this.tipos = this.tiposRenda;
       this.orcamento.tipoID = this.tiposRenda[0].id;
-    }
-    else{
+    }else{
       this.tipos = this.tiposGasto;
       this.orcamento.tipoID = this.tiposGasto[0].id;
     }
@@ -86,7 +85,7 @@ export class OrcamentoNovoComponent implements OnInit {
   })
 
   salvar(){
-    if(this.orcamentoID == 0){
+    if(this.orcamentoID === undefined || this.orcamentoID === null || this.orcamentoID === 0){
       this.orcamentoService.postOrcamentos(this.orcamento).subscribe(res => {     
         this.router.navigate(['/orcamento']);
       }, err => {
