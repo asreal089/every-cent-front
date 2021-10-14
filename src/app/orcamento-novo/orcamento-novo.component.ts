@@ -43,7 +43,7 @@ export class OrcamentoNovoComponent implements OnInit {
     this.user = this.tokenService.getUser();
     this.orcamento.userID = this.user.id;
 
-    if(this.orcamentoID === undefined || this.orcamentoID === null || this.orcamentoID === 0){
+    if(!(this.orcamentoID === undefined || this.orcamentoID === null || this.orcamentoID === 0)){
       this.orcamentoService.getOrcamentoByID(this.user.id, this.orcamentoID).subscribe((data:OrcamentoResponseDTO)=>{
         console.log(data)
         this.orcamento.tipoID = data.tipo_id;
