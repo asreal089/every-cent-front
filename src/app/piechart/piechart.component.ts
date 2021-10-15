@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PieChartData } from '../models/PieChartData';
 
 
@@ -9,10 +9,12 @@ import { PieChartData } from '../models/PieChartData';
 })
 export class PiechartComponent implements OnInit {
   
-  data: PieChartData = {labels: [], datasets :[] };
+  @Input() data: PieChartData = {labels: [], datasets :[] };
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.data = {
+    /*this.data = {
       labels: ['A','B','C'],
       datasets: [
           {
@@ -29,7 +31,7 @@ export class PiechartComponent implements OnInit {
               ]
           }]
       };
-
+      */
   }
   
 

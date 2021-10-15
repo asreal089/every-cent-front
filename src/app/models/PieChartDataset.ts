@@ -1,5 +1,5 @@
 export interface PieChartDataset{
     data: number[],
-    backgroundColor: string[],
-    hoverBackgroundColor: string[]
+    backgroundColor?: string[],
+    hoverBackgroundColor?: string[]
 }
