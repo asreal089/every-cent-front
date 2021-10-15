@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {TableModule} from 'primeng/table';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 import { PieChartData } from '../models/PieChartData';
+import { hoverColor } from '../constChartColors';
 
 @Component({
   selector: 'app-orcamento',
@@ -46,7 +47,6 @@ export class OrcamentoComponent implements OnInit {
 
     this.tiposDeGastos = [];
     this.valorDeGastos = [];
-
     this.gastos.filter(g => (this.tiposDeGastos.push(g.tipo)));
     this.gastos.filter(g => (this.valorDeGastos.push(g.valor)));
     
@@ -55,7 +55,8 @@ export class OrcamentoComponent implements OnInit {
       labels: this.tiposDeGastos,
       datasets: [
           {
-              data: this.valorDeGastos
+              data: this.valorDeGastos,
+              backgroundColor: hoverColor
           }]
       };
   }
