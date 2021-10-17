@@ -57,7 +57,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     RouterModule.forRoot([
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: '', component: LandingpageComponent},
-      {path: 'lancamento', component: LancamentoComponent},
+      {path: 'lancamento', component: LancamentoComponent, canActivate: [AuthGuard] },
       {path: 'orcamento', component: OrcamentoComponent, canActivate: [AuthGuard]},
       {path: 'orcamento/novo', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'orcamento/novo/:orcamentoID', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
