@@ -27,7 +27,6 @@ export class OrcamentoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    console.log(this.currentUser);
     await this.orcamentoService.getOrcamentos(this.currentUser.id).subscribe(
       (data:OrcamentoResponseDTO[]) => {
         this.setOrcamentos(data)

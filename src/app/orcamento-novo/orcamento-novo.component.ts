@@ -39,7 +39,6 @@ export class OrcamentoNovoComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => this.orcamentoID = params['orcamentoID']);
 
-    console.log(this.orcamentoID);
     this.user = this.tokenService.getUser();
     this.orcamento.userID = this.user.id;
 
@@ -88,14 +87,12 @@ export class OrcamentoNovoComponent implements OnInit {
       this.orcamentoService.postOrcamentos(this.orcamento).subscribe(res => {     
         this.router.navigate(['/orcamento']);
       }, err => {
-        console.log(this.orcamento);               
         console.log(err);
       });
     }else{
       this.orcamentoService.patchOrcamentos(this.orcamento, this.orcamentoID).subscribe((res)=>{
         this.router.navigate(['/orcamento']);
       },err =>{
-        console.log(this.orcamento);               
         console.log(err);
       });
     }

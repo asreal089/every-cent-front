@@ -1,1 +1,51 @@
-<p>lancamento works!</p>
+<br />
+    <app-piechart [data]="piechartdata" ></app-piechart>
+    <br />
+    <p-table [value]="receitas">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Tipo de Receita</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-receita>
+            <tr>
+                <td>{{receita.tipo}}</td>
+                <td>{{receita.descricao}}</td>
+                <td>{{receita.valor}}</td>
+                <td>
+                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.id)"></button>
+                    
+                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(receita.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+    <p-table [value]="gastos">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Tipo de Gasto</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-gasto>
+            <tr>
+                <td>{{gasto.tipo}}</td>
+                <th>{{gasto.descricao}}</th>
+                <td>{{gasto.valor}}</td>
+                <td>
+                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.id)"></button>
+                    
+                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(gasto.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+<br />
+    <button class="btn btn-primary btn-block" (click)="novoRegistro()">Novo Registro</button>
+<br />
