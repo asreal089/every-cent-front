@@ -56,6 +56,8 @@ export class LancamentoComponent implements OnInit {
               backgroundColor: backgroundColors
           }]
       };
+      console.log(this.gastos);
+      console.log(this.receitas);
   }
 
   async delete(lancamentoID:number){
@@ -69,11 +71,11 @@ export class LancamentoComponent implements OnInit {
   }
 
   novoRegistro(){
-    this.router.navigate(['/orcamento/novo']);
+    this.router.navigate(['/lancamento/registro']);
   }
 
-  editRegistro  (orcamentoID:number){
-    this.router.navigate(['/orcamento/novo/'+orcamentoID]);
+  editRegistro  (lancamnetoID:number){
+    this.router.navigate(['/lancamento/registro/'+lancamnetoID]);
   }
 
 }
