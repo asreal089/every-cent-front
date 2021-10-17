@@ -7,4 +7,5 @@ export class AppConstants {
     public static GOOGLE_AUTH_URL = AppConstants.OAUTH2_URL + "google" + AppConstants.REDIRECT_URL;
     public static TIPO_LANCAMENTO_URL = AppConstants.API_URL+"tipo-lancamento";
     public static ORCAMENTO_URL = AppConstants.API_URL+"orcamento";
+    public static LANCAMENTO_URL = AppConstants.API_URL+"lancamento";
 }

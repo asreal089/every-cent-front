@@ -13,7 +13,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OrcamentoService {
-  url:string='';
   constructor(private http: HttpClient) { }
  
   getOrcamentos(userID:number): Observable<OrcamentoResponseDTO[]> {

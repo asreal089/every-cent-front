@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import {TableModule} from 'primeng/table';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 import { PieChartData } from '../models/PieChartData';
-import { hoverColor } from '../constChartColors';
+import { backgroundColors, hoverColor } from '../constChartColors';
 
 @Component({
   selector: 'app-orcamento',
@@ -56,7 +56,7 @@ export class OrcamentoComponent implements OnInit {
       datasets: [
           {
               data: this.valorDeGastos,
-              backgroundColor: hoverColor
+              backgroundColor: backgroundColors
           }]
       };
   }
