@@ -30,6 +30,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-registro.component';
 
 
 
@@ -47,7 +48,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    OrcamentoNovoComponent
+    OrcamentoNovoComponent,
+    LancamentoRegistroComponent
 
   ],
   imports: [
@@ -58,6 +60,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent, canActivate: [AuthGuard] },
+      {path: 'lancamento/registro', component: LancamentoComponent, canActivate: [AuthGuard] },
+      {path: 'lancamento/registro/:lancamentoID', component: LancamentoComponent, canActivate: [AuthGuard] },
       {path: 'orcamento', component: OrcamentoComponent, canActivate: [AuthGuard]},
       {path: 'orcamento/novo', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'orcamento/novo/:orcamentoID', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
