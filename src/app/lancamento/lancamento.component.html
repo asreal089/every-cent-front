@@ -6,6 +6,7 @@
             <tr>
                 <th>Tipo de Receita</th>
                 <th>Descrição</th>
+                <th>Data</th>
                 <th>Valor</th>
                 <th>Ações</th>
             </tr>
@@ -14,6 +15,7 @@
             <tr>
                 <td>{{receita.tipo}}</td>
                 <td>{{receita.descricao}}</td>
+                <th>{{receita.data_lacamento|date}}</th>
                 <td>{{receita.valor}}</td>
                 <td>
                     <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.id)"></button>
@@ -29,6 +31,7 @@
             <tr>
                 <th>Tipo de Gasto</th>
                 <th>Descrição</th>
+                <th>Data</th>
                 <th>Valor</th>
                 <th>Ações</th>
             </tr>
@@ -37,6 +40,7 @@
             <tr>
                 <td>{{gasto.tipo}}</td>
                 <th>{{gasto.descricao}}</th>
+                <th>{{gasto.data_lacamento|date}}</th>
                 <td>{{gasto.valor}}</td>
                 <td>
                     <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.id)"></button>
