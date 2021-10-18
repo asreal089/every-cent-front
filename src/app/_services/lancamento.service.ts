@@ -4,6 +4,7 @@ import { LancamentoResponse } from '../models/lancamentoResponse';
 import { LancamentoRequest } from '../models/lancamentoRequest';
 import { AppConstants } from '../app.constants';
 import { Observable } from 'rxjs';
+import { LancamentoRegistroComponent } from '../lancamento-registro/lancamento-registro.component';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,8 +26,11 @@ const httpOptions = {
   }
  
   postLancamento(userID:number, lancamento:LancamentoRequest): Observable<LancamentoResponse> {
-    return this.http.post<LancamentoResponse>(AppConstants.LANCAMENTO_URL + '/'+userID+'/', {
-        lancamento
+    return this.http.post<LancamentoResponse>(AppConstants.LANCAMENTO_URL + '/'+userID, {
+      tipoID:lancamento.tipoID,
+      descricao:lancamento.descricao,
+      valor:lancamento.valor,
+      data_lacamento: lancamento.data_lacamento
     }, httpOptions);
   }
 

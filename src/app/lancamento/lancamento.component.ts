@@ -56,8 +56,7 @@ export class LancamentoComponent implements OnInit {
               backgroundColor: backgroundColors
           }]
       };
-      console.log(this.gastos);
-      console.log(this.receitas);
+
   }
 
   async delete(lancamentoID:number){

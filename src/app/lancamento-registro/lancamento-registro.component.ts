@@ -64,7 +64,6 @@ export class LancamentoRegistroComponent implements OnInit {
         this.lancamento.data_lacamento= new Date(data.data_lacamento);
       });
 
-      console.log(this.lancamento)
     }
 
 
