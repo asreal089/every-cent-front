@@ -3,5 +3,5 @@ export interface LancamentoRequest{
     tipoID:number,
     descricao:string,
     valor:number,
-    data_lacamento:string
+    data_lacamento:Date
 }

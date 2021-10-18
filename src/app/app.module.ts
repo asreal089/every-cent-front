@@ -31,6 +31,7 @@ import { AuthGuard } from './auth.guard';
 import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-registro.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
@@ -69,6 +70,7 @@ import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-re
       {path: 'signin', component: RegisterComponent}
     ]),
     FormsModule,
+    CalendarModule,
     HttpClientModule,
     TabViewModule,
     TableModule,
