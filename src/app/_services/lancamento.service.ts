@@ -36,7 +36,11 @@ const httpOptions = {
 
   patchLancamento(lancamento:LancamentoRequest, lancamnetoID:number, userID:number): Observable<LancamentoResponse> {
     return this.http.patch<LancamentoResponse>(AppConstants.LANCAMENTO_URL + '/' + userID + '/' + lancamnetoID, {
-        lancamento
+      lacamentoID: lancamnetoID,
+      tipoID:lancamento.tipoID,
+      descricao:lancamento.descricao,
+      valor:lancamento.valor,
+      data_lacamento: lancamento.data_lacamento
     }, httpOptions);
   }
 
