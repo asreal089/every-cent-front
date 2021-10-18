@@ -45,7 +45,7 @@ export class LancamentoRegistroComponent implements OnInit {
   user: any;
   lancamentoID:number = 0;
 
-  constructor(private route: ActivatedRoute, private router:Router,private fb:FormBuilder,private tipoLancamentoSerive: TipoLancamentoService, private lancamentoService: LancamentoService, private tokenService:TokenStorageService) {}
+  constructor(private route: ActivatedRoute, private router:Router, private tipoLancamentoSerive: TipoLancamentoService, private lancamentoService: LancamentoService, private tokenService:TokenStorageService) {}
 
 
   ngOnInit(): void {
@@ -95,10 +95,6 @@ export class LancamentoRegistroComponent implements OnInit {
     }
   
   }
-
-  registrationForm = this.fb.group({
-     tipo: {id:1, tipo:"salário", isRenda:true}
-  })
 
   salvar(){
     if(this.lancamentoID === undefined || this.lancamentoID === null || this.lancamentoID === 0){
