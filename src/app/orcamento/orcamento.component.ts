@@ -3,10 +3,11 @@ import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { Router } from '@angular/router';
-import {TableModule} from 'primeng/table';
-import {MenuItem, PrimeIcons} from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 import { PieChartData } from '../models/PieChartData';
 import { backgroundColors, hoverColor } from '../constChartColors';
+import { Soma } from '../models/Somas';
 
 @Component({
   selector: 'app-orcamento',
@@ -14,26 +15,28 @@ import { backgroundColors, hoverColor } from '../constChartColors';
   styleUrls: ['./orcamento.component.css']
 })
 export class OrcamentoComponent implements OnInit {
-  currentUser:any;
-  orcamentos: OrcamentoResponseDTO[]=[];
+  currentUser: any;
+  orcamentos: OrcamentoResponseDTO[] = [];
   data: OrcamentoResponseDTO[] = [];
-  gastos:OrcamentoResponseDTO[]=[];
-  receitas: OrcamentoResponseDTO[]=[];
-  piechartdata: PieChartData={labels:[],datasets:[]};
-  tiposDeGastos: string[]=[];
-  valorDeGastos: number[]=[];
+  gastos: OrcamentoResponseDTO[] = [];
+  receitas: OrcamentoResponseDTO[] = [];
+  piechartdata: PieChartData = { labels: [], datasets: [] };
+  tiposDeGastos: string[] = [];
+  valorDeGastos: number[] = [];
+  somas: Soma[]=[]; 
 
-  constructor(private router:Router,private orcamentoService: OrcamentoService, private tokenStorage: TokenStorageService) {}
+  constructor(private router: Router, private orcamentoService: OrcamentoService, private tokenStorage: TokenStorageService) { }
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
     await this.orcamentoService.getOrcamentos(this.currentUser.id).subscribe(
-      (data:OrcamentoResponseDTO[]) => {
-        this.setOrcamentos(data)
-        return data
+      (data: OrcamentoResponseDTO[]) => {
+        this.setOrcamentos(data);
         
+        return data
+
       },
-      (err:any) => {
+      (err: any) => {
         return err.error.message;
       }
     );
@@ -42,40 +45,42 @@ export class OrcamentoComponent implements OnInit {
   setOrcamentos(data: OrcamentoResponseDTO[]) {
     this.orcamentos = data;
     this.receitas = data.filter(o => o.is_renda === true);
-    this.gastos = data.filter(o=>o.is_renda===false);
+    this.gastos = data.filter(o => o.is_renda === false);
 
     this.tiposDeGastos = [];
     this.valorDeGastos = [];
+    this.somas =[];
     this.gastos.filter(g => (this.tiposDeGastos.push(g.tipo)));
     this.gastos.filter(g => (this.valorDeGastos.push(g.valor)));
+    this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
+    this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
     
-
     this.piechartdata = {
       labels: this.tiposDeGastos,
       datasets: [
-          {
-              data: this.valorDeGastos,
-              backgroundColor: backgroundColors
-          }]
-      };
+        {
+          data: this.valorDeGastos,
+          backgroundColor: backgroundColors
+        }]
+    };
   }
 
-  async delete(orcamentoID:any){
-    await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {     
+  async delete(orcamentoID: any) {
+    await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {
       this.orcamentos = this.orcamentos.filter(o => o.id != orcamentoID);
       this.setOrcamentos(this.orcamentos);
-    }, err => {               
+    }, err => {
       console.log(err);
     });
-    
+
   }
 
-  novoRegistro(){
+  novoRegistro() {
     this.router.navigate(['/orcamento/novo']);
   }
 
-  editRegistro  (orcamentoID:number){
-    this.router.navigate(['/orcamento/novo/'+orcamentoID]);
+  editRegistro(orcamentoID: number) {
+    this.router.navigate(['/orcamento/novo/' + orcamentoID]);
   }
 
 }

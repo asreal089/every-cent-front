@@ -1,18 +1,18 @@
 export const backgroundColors: string[] =[
-    '#F3E5F5',
-    '#E1BEE7',
-    '#CE93D8',
-    '#BA68C8',
-    '#AB47BC',
-    '#9C27B0',
-    '#8E24AA',
-    '#7B1FA2',
-    '#6A1B9A',
     '#4A148C',
-    '#EA80FC',
-    '#E040FB',
+    '#6A1B9A',
+    '#7B1FA2',
+    '#AA00FF', 
     '#D500F9',
-    '#AA00FF' 
+    '#E040FB',
+    '#EA80FC',
+    '#8E24AA',
+    '#9C27B0',
+    '#AB47BC',
+    '#BA68C8',
+    '#CE93D8',
+    '#E1BEE7',
+    '#F3E5F5'
 ]
 
 export const hoverColor:string[] =[
