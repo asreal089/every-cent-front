@@ -14,6 +14,8 @@ import { TokenStorageService } from '../_services/token-storage-service.service'
 })
 export class LancamentoComponent implements OnInit {
   currentUser: any;
+  currentMont: number = new Date().getMonth(); 
+  currentYear: number = new Date().getFullYear();
   lancamentos: LancamentoResponse[] = [];
   data: LancamentoResponse[] = [];
   gastos: LancamentoResponse[] = [];
@@ -42,8 +44,9 @@ export class LancamentoComponent implements OnInit {
   }
   setLancamentos(data: LancamentoResponse[]) {
     this.lancamentos = data;
-    this.receitas = data.filter(lancamento => lancamento.isRenda === true);
-    this.gastos = data.filter(lancamento => lancamento.isRenda === false);
+    this.lancamentos = this.lancamentos.filter(lancamento => (new Date(lancamento.data_lacamento).getMonth() == this.currentMont)&&(new Date(lancamento.data_lacamento).getFullYear() == this.currentYear));
+    this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
+    this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
 
     this.tiposDeGastos = [];
     this.valorDeGastos = [];
