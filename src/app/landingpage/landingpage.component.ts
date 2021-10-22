@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../_services/token-storage-service.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -8,16 +9,21 @@ import { Router } from '@angular/router';
 })
 export class LandingpageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tokenStorage: TokenStorageService) { }
+
+  isLoggedIn: boolean = false;
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
-  login(){
+  login() {
     this.router.navigate(['/login']);
   }
 
-  signin(){
+  signin() {
     this.router.navigate(['/signin']);
   }
 }

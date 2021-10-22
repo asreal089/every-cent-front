@@ -1,8 +1,9 @@
-<br />
-    <img height="100%" width="100%" src="../../assets/every-cent-land1.jpg" alt="every-cent">
-<br />
-<br />
-    <button class="btn btn-primary btn-block" (click)="login()">Entrar</button>
-<br />
-    <button class="btn btn-primary btn-block" (click)="signin()">Faça seu Cadastro</button>
-<br />
+
+<img class="padded" height="100%" width="100%" src="../../assets/every-cent-land1.jpg" alt="every-cent" style="padding-bottom: 2rem; padding-top: 2rem;">
+    
+<div *ngIf="!isLoggedIn">
+        <button class="btn btn-primary btn-block" (click)="login()">Entrar</button>
+    <br />
+       <button class="btn btn-primary btn-block" (click)="signin()">Faça seu Cadastro</button>
+    <br />
+</div>
