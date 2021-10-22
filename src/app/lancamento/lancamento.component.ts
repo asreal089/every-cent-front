@@ -33,8 +33,7 @@ export class LancamentoComponent implements OnInit {
     await this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
       (data: LancamentoResponse[]) => {
         this.setLancamentos(data)
-        return data
-
+        return data;
       },
       (err: any) => {
         return err.error.message;

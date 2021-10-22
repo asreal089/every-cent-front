@@ -10,13 +10,13 @@
 
 :root {
   /* Colors */
-  --foreground-default: #5770ff;
+  --foreground-default: #8c52ff;
   --foreground-secondary: #98abfd;
   --foreground-tertiary: #90c4ff;
   --foreground-quaternary: #f4faff;
   --foreground-light: #d3feff;
 
-  --background-default: #7f69fd;
+  --background-default: #8c52ff;
   --background-secondary: #d1c1ff;
   --background-tertiary: #c8a4f8;
   --background-light: #ffffff;
