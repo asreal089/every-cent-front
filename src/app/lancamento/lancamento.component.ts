@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { backgroundColors } from '../constChartColors';
-import { LancamentoResponse } from '../models/lancamentoResponse';
+import { LancamentoResponse } from '../models/LancamentoResponse';
 import { PieChartData } from '../models/PieChartData';
 import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
