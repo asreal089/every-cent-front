@@ -21,8 +21,7 @@ export class LancamentoComponent implements OnInit {
   gastos: LancamentoResponse[] = [];
   receitas: LancamentoResponse[] = [];
   piechartdata: PieChartData = { labels: [], datasets: [] };
-  tiposDeGastos: string[] = [];
-  valorDeGastos: number[] = [];
+  tiposDeGastos: Soma[] = [];
   somas: Soma[]=[]; 
 
 
@@ -48,18 +47,20 @@ export class LancamentoComponent implements OnInit {
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
 
     this.tiposDeGastos = [];
-    this.valorDeGastos = [];
-    this.gastos.filter(g => (this.tiposDeGastos.push(g.tipo)));
-    this.gastos.filter(g => (this.valorDeGastos.push(g.valor)));
+    
+    this.tiposDeGastos = Array.from(this.gastos.reduce(
+      (m, {tipo, valor}) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
+    ), ([descricao, valor]) => ({descricao, valor}));
+
     this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
     this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
     
 
     this.piechartdata = {
-      labels: this.tiposDeGastos,
+      labels: this.tiposDeGastos.map(g => g.descricao),
       datasets: [
         {
-          data: this.valorDeGastos,
+          data: this.tiposDeGastos.map(g => g.valor),
           backgroundColor: backgroundColors
         }]
     };
