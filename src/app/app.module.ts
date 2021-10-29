@@ -13,7 +13,6 @@ import { FooterComponent } from './footer/footer.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { ChartModule } from 'primeng/chart';
 import {TabViewModule} from 'primeng/tabview';
-import { StackedchartComponent } from './stackedchart/stackedchart.component';
 import { EventlistComponent } from './eventlist/eventlist.component';
 import {TableModule} from 'primeng/table';
 import { ProductService } from './eventlist/productservice';
@@ -41,7 +40,6 @@ import { CalendarModule } from 'primeng/calendar';
     NavbarComponent,
     FooterComponent,
     PiechartComponent,
-    StackedchartComponent,
     EventlistComponent,
     LandingpageComponent,
     LancamentoComponent,
