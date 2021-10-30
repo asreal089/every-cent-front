@@ -5,6 +5,7 @@ import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 
+const newLocal = ['lançamentos', 'orçamento'];
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,6 +25,9 @@ export class DashboardComponent implements OnInit {
   somas: Soma[] = [];
   dataRadar: any={}; 
   radarConfig:any={};
+  stackedLabels:any={};
+  configStack:any={};
+  dataStacked:any={};
 
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
@@ -55,6 +59,10 @@ export class DashboardComponent implements OnInit {
       (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
     ), ([descricao, valor]) => ({ descricao, valor }));
 
+    this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
+    this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
+    
+
     console.log("Olar esses são gastos e receitas.")
     console.log(this.tiposDeGastos);
     console.log(this.tiposDeReceitas);
@@ -85,9 +93,43 @@ export class DashboardComponent implements OnInit {
         }
       },
     };
+    this.configStack = {
+      type: 'bar',
+      data: data,
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart - Stacked'
+          },
+        },
+        responsive: true,
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true
+          }
+        }
+      }
+    };
+  
+    this.stackedLabels = {newLocal};
+    this.dataStacked = {
+      labels: this.stackedLabels,
+      datasets: [
+        {
+          label: 'Lançamentos',
+          data: this.somas.filter(s => s.descricao ==='Total de receitas')
+        },
+        {
+          label: 'orcamentos',
+          data: this.somas.filter(s => s.descricao ==='Total de Gastos')
+        }
+      ]
+    };
   }
-
-
 
 
 }

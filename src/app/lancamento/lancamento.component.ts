@@ -38,7 +38,6 @@ export class LancamentoComponent implements OnInit {
         return err.error.message;
       }
     );
-
   }
   setLancamentos(data: LancamentoResponse[]) {
     this.lancamentos = data;

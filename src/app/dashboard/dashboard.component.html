@@ -1,7 +1,15 @@
 <br />
-    <h1>Resumo:</h1>
+    <h1 class="text-center">Radar de Despesas:</h1>
 <br />
 
 <div class="chart-container text-center">
     <p-chart type="radar" [data]="dataRadar"></p-chart>
+</div>
+
+<br />
+    <h1 class="text-center">Gráfico dos gastos:</h1>
+<br />
+
+<div class="chart-container text-center">
+    <p-chart type="bar" [data]="dataRadar"></p-chart>
 </div>
