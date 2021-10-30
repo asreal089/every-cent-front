@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit {
   tiposDeGastos: Soma[] = [];
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
+  dataRadar: any={}; 
+  radarConfig:any={};
 
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
@@ -37,6 +39,8 @@ export class DashboardComponent implements OnInit {
         return err.error.message;
       }
     );
+
+   
 
   }
   setLancamentos(data: LancamentoResponse[]) {
@@ -54,6 +58,33 @@ export class DashboardComponent implements OnInit {
     console.log("Olar esses são gastos e receitas.")
     console.log(this.tiposDeGastos);
     console.log(this.tiposDeReceitas);
+
+    this.dataRadar = {
+      labels: this.tiposDeGastos.map(g=>g.descricao),
+      datasets: [{
+        label: 'Gastos',
+        data: this.tiposDeGastos.map(g=>g.valor),
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }]
+    };
+
+     this.radarConfig = {
+      type: 'radar',
+      data: this.dataRadar,
+      options: {
+        elements: {
+          line: {
+            borderWidth: 3
+          }
+        }
+      },
+    };
   }
 
 
