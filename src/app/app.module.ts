@@ -31,7 +31,8 @@ import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.componen
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-registro.component';
 import { CalendarModule } from 'primeng/calendar';
-import { RadarChartComponentComponent } from './radar-chart-component/radar-chart-component.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { RadarChartComponent } from './radar-chart/radar-chart.component';
 
 
 
@@ -50,7 +51,8 @@ import { RadarChartComponentComponent } from './radar-chart-component/radar-char
     RegisterComponent,
     OrcamentoNovoComponent,
     LancamentoRegistroComponent,
-    RadarChartComponentComponent
+    BarChartComponent,
+    RadarChartComponent
 
   ],
   imports: [

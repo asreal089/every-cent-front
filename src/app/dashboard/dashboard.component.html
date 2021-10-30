@@ -2,12 +2,10 @@
     <h1 class="text-center">Radar de Despesas:</h1>
 <br />
 
-<app-radar-chart-component [data]="dataRadar"></app-radar-chart-component>
+<app-radar-chart [data]="dataRadar"></app-radar-chart>
 
 <br />
     <h1 class="text-center">Gráfico dos gastos:</h1>
 <br />
 
-<div class="chart-container text-center">
-    <p-chart type="bar" [data]="dataRadar"></p-chart>
-</div>
+<app-bar-chart [data]="dataRadar"></app-bar-chart>

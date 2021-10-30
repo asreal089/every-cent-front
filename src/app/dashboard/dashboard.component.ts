@@ -25,9 +25,7 @@ export class DashboardComponent implements OnInit {
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
   dataRadar: RadarChartData = {};
-  configStack: any = {};
-  dataStacked: any = {};
-
+  
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
 
@@ -69,43 +67,6 @@ export class DashboardComponent implements OnInit {
         fill: true
       }]
     };
-
-    this.dataStacked = {
-      labels: ['lançamentos', 'orçamento'],
-      datasets: [
-        /*{
-          label: 'Lançamentos',
-          data: this.somas.filter(s => s.descricao === "Total de receitas")
-        },*/
-        {
-          label: 'Gastos',
-          data: this.somas.filter(s => s.descricao === 'Total de Gastos')
-        }
-      ]
-    };
-
-    this.configStack = {
-      type: 'bar',
-      data: this.dataStacked,
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Chart.js Bar Chart - Stacked'
-          },
-        },
-        responsive: true,
-        scales: {
-          x: {
-            stacked: true,
-          },
-          y: {
-            stacked: true
-          }
-        }
-      }
-    };
-
   }
 
 
