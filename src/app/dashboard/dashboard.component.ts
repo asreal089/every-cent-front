@@ -23,11 +23,11 @@ export class DashboardComponent implements OnInit {
   tiposDeGastos: Soma[] = [];
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
-  dataRadar: any={}; 
-  radarConfig:any={};
-  stackedLabels:any={};
-  configStack:any={};
-  dataStacked:any={};
+  dataRadar: any = {};
+  radarConfig: any = {};
+  stackedLabels: any = {};
+  configStack: any = {};
+  dataStacked: any = {};
 
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-   
+
 
   }
   setLancamentos(data: LancamentoResponse[]) {
@@ -59,19 +59,14 @@ export class DashboardComponent implements OnInit {
       (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
     ), ([descricao, valor]) => ({ descricao, valor }));
 
-    this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
-    this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
-    
-
-    console.log("Olar esses são gastos e receitas.")
-    console.log(this.tiposDeGastos);
-    console.log(this.tiposDeReceitas);
+    this.somas.push({ descricao: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
+    this.somas.push({ descricao: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
 
     this.dataRadar = {
-      labels: this.tiposDeGastos.map(g=>g.descricao),
+      labels: this.tiposDeGastos.map(g => g.descricao),
       datasets: [{
         label: 'Gastos',
-        data: this.tiposDeGastos.map(g=>g.valor),
+        data: this.tiposDeGastos.map(g => g.valor),
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
@@ -82,7 +77,7 @@ export class DashboardComponent implements OnInit {
       }]
     };
 
-     this.radarConfig = {
+    this.radarConfig = {
       type: 'radar',
       data: this.dataRadar,
       options: {
@@ -93,9 +88,26 @@ export class DashboardComponent implements OnInit {
         }
       },
     };
+
+
+    this.stackedLabels = { newLocal };
+    this.dataStacked = {
+      labels: this.stackedLabels,
+      datasets: [
+        /*{
+          label: 'Lançamentos',
+          data: this.somas.filter(s => s.descricao === "Total de receitas")
+        },*/
+        {
+          label: 'Gastos',
+          data: this.somas.filter(s => s.descricao === 'Total de Gastos')
+        }
+      ]
+    };
+
     this.configStack = {
       type: 'bar',
-      data: data,
+      data: this.dataStacked,
       options: {
         plugins: {
           title: {
@@ -114,21 +126,7 @@ export class DashboardComponent implements OnInit {
         }
       }
     };
-  
-    this.stackedLabels = {newLocal};
-    this.dataStacked = {
-      labels: this.stackedLabels,
-      datasets: [
-        {
-          label: 'Lançamentos',
-          data: this.somas.filter(s => s.descricao ==='Total de receitas')
-        },
-        {
-          label: 'orcamentos',
-          data: this.somas.filter(s => s.descricao ==='Total de Gastos')
-        }
-      ]
-    };
+
   }
 
 
