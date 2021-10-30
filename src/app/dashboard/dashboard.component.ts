@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LancamentoResponse } from '../models/LancamentoResponse';
-import { RadarChartConfig } from '../models/RadarChartConfig';
 import { RadarChartData } from '../models/RadarChartData';
 import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
@@ -26,7 +25,6 @@ export class DashboardComponent implements OnInit {
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
   dataRadar: RadarChartData = {};
-  radarConfig: RadarChartConfig = {};
   configStack: any = {};
   dataStacked: any = {};
 
@@ -71,19 +69,6 @@ export class DashboardComponent implements OnInit {
         fill: true
       }]
     };
-
-    this.radarConfig = {
-      type: 'radar',
-      data: this.dataRadar,
-      options: {
-        elements: {
-          line: {
-            borderWidth: 3
-          }
-        }
-      },
-    };
-
 
     this.dataStacked = {
       labels: ['lançamentos', 'orçamento'],
