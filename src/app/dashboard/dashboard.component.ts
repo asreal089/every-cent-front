@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LancamentoResponse } from '../models/LancamentoResponse';
+import { RadarChartConfig } from '../models/RadarChartConfig';
+import { RadarChartData } from '../models/RadarChartData';
 import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
@@ -23,9 +25,8 @@ export class DashboardComponent implements OnInit {
   tiposDeGastos: Soma[] = [];
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
-  dataRadar: any = {};
-  radarConfig: any = {};
-  stackedLabels: any = {};
+  dataRadar: RadarChartData = {};
+  radarConfig: RadarChartConfig = {};
   configStack: any = {};
   dataStacked: any = {};
 
@@ -67,13 +68,7 @@ export class DashboardComponent implements OnInit {
       datasets: [{
         label: 'Gastos',
         data: this.tiposDeGastos.map(g => g.valor),
-        fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgb(255, 99, 132)',
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(255, 99, 132)'
+        fill: true
       }]
     };
 
@@ -90,9 +85,8 @@ export class DashboardComponent implements OnInit {
     };
 
 
-    this.stackedLabels = { newLocal };
     this.dataStacked = {
-      labels: this.stackedLabels,
+      labels: ['lançamentos', 'orçamento'],
       datasets: [
         /*{
           label: 'Lançamentos',
