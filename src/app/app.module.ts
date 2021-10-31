@@ -31,6 +31,8 @@ import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.componen
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-registro.component';
 import { CalendarModule } from 'primeng/calendar';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { RadarChartComponent } from './radar-chart/radar-chart.component';
 
 
 
@@ -48,7 +50,9 @@ import { CalendarModule } from 'primeng/calendar';
     LoginComponent,
     RegisterComponent,
     OrcamentoNovoComponent,
-    LancamentoRegistroComponent
+    LancamentoRegistroComponent,
+    BarChartComponent,
+    RadarChartComponent
 
   ],
   imports: [

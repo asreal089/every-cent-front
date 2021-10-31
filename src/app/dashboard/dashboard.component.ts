@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LancamentoResponse } from '../models/LancamentoResponse';
+import { RadarChartData } from '../models/RadarChartData';
 import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
@@ -23,12 +24,8 @@ export class DashboardComponent implements OnInit {
   tiposDeGastos: Soma[] = [];
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
-  dataRadar: any = {};
-  radarConfig: any = {};
-  stackedLabels: any = {};
-  configStack: any = {};
-  dataStacked: any = {};
-
+  dataRadar: RadarChartData = {};
+  
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
 
@@ -67,66 +64,9 @@ export class DashboardComponent implements OnInit {
       datasets: [{
         label: 'Gastos',
         data: this.tiposDeGastos.map(g => g.valor),
-        fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgb(255, 99, 132)',
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(255, 99, 132)'
+        fill: true
       }]
     };
-
-    this.radarConfig = {
-      type: 'radar',
-      data: this.dataRadar,
-      options: {
-        elements: {
-          line: {
-            borderWidth: 3
-          }
-        }
-      },
-    };
-
-
-    this.stackedLabels = { newLocal };
-    this.dataStacked = {
-      labels: this.stackedLabels,
-      datasets: [
-        /*{
-          label: 'Lançamentos',
-          data: this.somas.filter(s => s.descricao === "Total de receitas")
-        },*/
-        {
-          label: 'Gastos',
-          data: this.somas.filter(s => s.descricao === 'Total de Gastos')
-        }
-      ]
-    };
-
-    this.configStack = {
-      type: 'bar',
-      data: this.dataStacked,
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Chart.js Bar Chart - Stacked'
-          },
-        },
-        responsive: true,
-        scales: {
-          x: {
-            stacked: true,
-          },
-          y: {
-            stacked: true
-          }
-        }
-      }
-    };
-
   }
 
 
