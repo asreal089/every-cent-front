@@ -65,7 +65,7 @@ export class OrcamentoComponent implements OnInit {
     };
   }
 
-  async delete(orcamentoID: any) {
+  async delete(orcamentoID: number) {
     await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {
       this.orcamentos = this.orcamentos.filter(o => o.id != orcamentoID);
       this.setOrcamentos(this.orcamentos);
