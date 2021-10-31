@@ -38,14 +38,19 @@ export class LancamentoComponent implements OnInit {
         return err.error.message;
       }
     );
+
   }
   setLancamentos(data: LancamentoResponse[]) {
+    console.log('cai aqui')
+    console.log(data);
+    this.lancamentos = [];
     this.lancamentos = data;
     this.lancamentos = this.lancamentos.filter(lancamento => (new Date(lancamento.data_lacamento).getMonth() == this.currentMont)&&(new Date(lancamento.data_lacamento).getFullYear() == this.currentYear));
     this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
 
     this.tiposDeGastos = [];
+    this.somas = [];
     
     this.tiposDeGastos = Array.from(this.gastos.reduce(
       (m, {tipo, valor}) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
@@ -66,9 +71,10 @@ export class LancamentoComponent implements OnInit {
 
   }
 
-  async delete(lancamentoID: number) {
-    await this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      this.lancamentos = this.lancamentos.filter(o => o.lancamentoID != lancamentoID);
+  delete(lancamentoID: number) {
+    this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
+      let itemIndex = this.lancamentos.findIndex(obj => obj['lancamentoID'] === lancamentoID);
+      this.lancamentos.splice(itemIndex, 1);
       this.setLancamentos(this.lancamentos);
     }, err => {
       console.log(err);
