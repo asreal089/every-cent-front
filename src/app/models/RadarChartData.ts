@@ -1,6 +1,6 @@
 export interface RadarChartData{
-    labels?:string[];
-    datasets?:RadarChartDataSet[];    
+    labels:string[];
+    datasets:RadarChartDataSet[];    
 }
 
 export interface RadarChartDataSet {

@@ -1,11 +1,18 @@
-<br />
-    <h1 class="text-center">Radar de Despesas:</h1>
-<br />
+<div *ngIf="dataRadar.labels.length > 2">
+    <br />
+        <h1 class="text-center">Radar de Despesas:</h1>
+    <br />
 
-<app-radar-chart [data]="dataRadar"></app-radar-chart>
+    <app-radar-chart [data]="dataRadar"></app-radar-chart>
 
-<br />
+    <br />
     <h1 class="text-center">Gráfico dos gastos:</h1>
-<br />
+    <br />
 
-<app-bar-chart [data]="dataRadar"></app-bar-chart>
+    <app-bar-chart [data]="dataRadar"></app-bar-chart>
+</div>
+
+<div *ngIf="2 >= dataRadar.labels.length" >
+    <br />
+    <h1 class="text-center">Sem dados para esse mês</h1>
+</div>

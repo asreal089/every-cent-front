@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   tiposDeGastos: Soma[] = [];
   tiposDeReceitas: Soma[] = [];
   somas: Soma[] = [];
-  dataRadar: RadarChartData = {};
+  dataRadar: RadarChartData = {labels:[], datasets:[]};
   
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
