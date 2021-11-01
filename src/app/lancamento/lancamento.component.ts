@@ -31,7 +31,7 @@ export class LancamentoComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     await this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
       (data: LancamentoResponse[]) => {
-        this.setLancamentos(data)
+        this.setLancamentos(data);
         return data;
       },
       (err: any) => {
@@ -40,12 +40,11 @@ export class LancamentoComponent implements OnInit {
     );
 
   }
+  
   setLancamentos(data: LancamentoResponse[]) {
-    console.log('cai aqui')
-    console.log(data);
-    this.lancamentos = [];
     this.lancamentos = data;
     this.lancamentos = this.lancamentos.filter(lancamento => (new Date(lancamento.data_lacamento).getMonth() == this.currentMont)&&(new Date(lancamento.data_lacamento).getFullYear() == this.currentYear));
+    
     this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
 
@@ -71,11 +70,10 @@ export class LancamentoComponent implements OnInit {
 
   }
 
-  delete(lancamentoID: number) {
-    this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      let itemIndex = this.lancamentos.findIndex(obj => obj['lancamentoID'] === lancamentoID);
-      this.lancamentos.splice(itemIndex, 1);
-      this.setLancamentos(this.lancamentos);
+  async delete(lancamentoID: number) {
+    await this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
+      let lancamentosAux = this.lancamentos.filter(l => l.lancamentoID != lancamentoID );
+      this.setLancamentos(lancamentosAux);
     }, err => {
       console.log(err);
     });

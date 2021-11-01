@@ -32,9 +32,9 @@
                 <td>{{receita.data_lacamento|date}}</td>
                 <td>{{receita.valor}}</td>
                 <td>
-                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.lacamentoID)"></button>
+                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.lancamentoID)"></button>
                     
-                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(receita.lacamentoID)"></button>
+                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(receita.lancamentoID)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -57,9 +57,9 @@
                 <td>{{gasto.data_lacamento|date}}</td>
                 <td>{{gasto.valor}}</td>
                 <td>
-                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.lacamentoID)"></button>
+                    <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.lancamentoID)"></button>
                     
-                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(gasto.lacamentoID)"></button>
+                    <button class="btn pi pi-pencil" style="font-size: 1rem" (click)="editRegistro(gasto.lancamentoID)"></button>
                 </td>
             </tr>
         </ng-template>

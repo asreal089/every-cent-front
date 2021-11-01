@@ -43,7 +43,7 @@ const httpOptions = {
     }, httpOptions);
   }
 
-  deletelancamentos(userID:number, lancamnetoID:number): Observable<any> {
-    return this.http.delete<any>(AppConstants.LANCAMENTO_URL + '/' + userID + '/' + lancamnetoID, httpOptions);
+  deletelancamentos(userID:number, lancamnetoID:number): Observable<void> {
+    return this.http.delete<void>(AppConstants.LANCAMENTO_URL + '/' + userID + '/' + lancamnetoID, httpOptions);
   }
 }
