@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
 
 
 
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
   errorMessage = '';
   currentUser: any;
 
-  constructor(private tokenStorage: TokenStorageService, private userService: UserService) {}
+  constructor(private tokenStorage: TokenStorageService, private userService: UserService,  private router:Router) {}
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.tokenStorage.signOut();
-    window.location.reload();
+    this.isLoggedIn = false;
+    this.router.navigate(['/'])
   }
 
 }
