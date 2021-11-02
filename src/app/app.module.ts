@@ -33,6 +33,7 @@ import { LancamentoRegistroComponent } from './lancamento-registro/lancamento-re
 import { CalendarModule } from 'primeng/calendar';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { RadarChartComponent } from './radar-chart/radar-chart.component';
+import { authInterceptorProviders } from './login/authinterceptor';
 
 
 
@@ -80,7 +81,7 @@ import { RadarChartComponent } from './radar-chart/radar-chart.component';
     SelectButtonModule,
     AppRoutingModule
   ],
-  providers: [ProductService, FormBuilder],
+  providers: [ProductService, FormBuilder, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
