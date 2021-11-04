@@ -1,14 +1,23 @@
 # EveryCentFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
+Esse é um projeto em angular front end da aplicação de controle de gastos.
+A api desse projeto pode ser encontrada no projeto [every-cent-api](https://github.com/asreal089/every-cent-api)
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Para rodar o projeto basta usar o comando:
+```
+ ng serve
+```
 
-## Code scaffolding
+Algumas rotas estão configuradas no arquivo `app.constants.ts`.
+Caso queira usar as configuração padrões o rpojeto deve ser rodado na porta 8081. Para isso use:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+ng serve --port 8081
+```
+---
+# Diretivas gerais do angular:
 
 ## Build
 
