@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    await this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
+    this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
       (data: LancamentoResponse[]) => {
         this.setLancamentos(data)
         return data;
