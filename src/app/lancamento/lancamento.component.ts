@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { backgroundColors } from '../constChartColors';
 import { LancamentoResponse } from '../models/LancamentoResponse';
 import { PieChartData } from '../models/PieChartData';
@@ -14,7 +14,7 @@ import { TokenStorageService } from '../_services/token-storage-service.service'
 })
 export class LancamentoComponent implements OnInit {
   currentUser: any;
-  currentMont: number = new Date().getMonth(); 
+  currentMont: number = new Date().getMonth();
   currentYear: number = new Date().getFullYear();
   lancamentos: LancamentoResponse[] = [];
   data: LancamentoResponse[] = [];
@@ -22,14 +22,17 @@ export class LancamentoComponent implements OnInit {
   receitas: LancamentoResponse[] = [];
   piechartdata: PieChartData = { labels: [], datasets: [] };
   tiposDeGastos: Soma[] = [];
-  somas: Soma[]=[]; 
+  somas: Soma[] = [];
+  mesCounter: number = 0;
 
 
-  constructor(private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private lancamentoService: LancamentoService, private tokenStorage: TokenStorageService) { }
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    await this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
+    this.route.params.subscribe((params: Params) => this.mesCounter = params['mes']);
+    this.mesCounter = this.mesCounter ? this.mesCounter : 0;
+    this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
       (data: LancamentoResponse[]) => {
         this.setLancamentos(data);
         return data;
@@ -40,24 +43,28 @@ export class LancamentoComponent implements OnInit {
     );
 
   }
-  
+
   setLancamentos(data: LancamentoResponse[]) {
     this.lancamentos = data;
-    this.lancamentos = this.lancamentos.filter(lancamento => (new Date(lancamento.data_lacamento).getMonth() == this.currentMont)&&(new Date(lancamento.data_lacamento).getFullYear() == this.currentYear));
-    
+    console.log("mes atual: " + this.currentMont);
+    console.log("mes atual: " + this.mesCounter);
+    this.lancamentos = this.lancamentos.filter(lancamento => 
+      (new Date(lancamento.data_lacamento).getMonth() == this.currentMont - this.mesCounter % 12)
+      && (new Date(lancamento.data_lacamento).getFullYear() == this.currentYear - Math.floor(this.mesCounter/12)));
+
     this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
 
     this.tiposDeGastos = [];
     this.somas = [];
-    
-    this.tiposDeGastos = Array.from(this.gastos.reduce(
-      (m, {tipo, valor}) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
-    ), ([descricao, valor]) => ({descricao, valor}));
 
-    this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
-    this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
-    
+    this.tiposDeGastos = Array.from(this.gastos.reduce(
+      (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
+    ), ([descricao, valor]) => ({ descricao, valor }));
+
+    this.somas.push({ descricao: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
+    this.somas.push({ descricao: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
+
 
     this.piechartdata = {
       labels: this.tiposDeGastos.map(g => g.descricao),
@@ -71,8 +78,8 @@ export class LancamentoComponent implements OnInit {
   }
 
   async delete(lancamentoID: number) {
-    await this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      let lancamentosAux = this.lancamentos.filter(l => l.lancamentoID != lancamentoID );
+    this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
+      let lancamentosAux = this.lancamentos.filter(l => l.lancamentoID != lancamentoID);
       this.setLancamentos(lancamentosAux);
     }, err => {
       console.log(err);

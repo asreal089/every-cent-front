@@ -1,16 +1,11 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { FormBuilder, NgForm } from "@angular/forms";
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TipoLancamento } from '../models/TipoLancamento';
 import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { LancamentoRequest } from '../models/LancamentoRequest';
 import { LancamentoService } from '../_services/lancamento.service';
-import {Calendar, CalendarModule} from 'primeng/calendar';
-import {MenuItem} from 'primeng/api';
 import { LancamentoResponse } from '../models/LancamentoResponse';
-
-
 
 
 @Injectable({
@@ -72,7 +67,7 @@ export class LancamentoRegistroComponent implements OnInit {
         this.setTipos(data);
         return data
       },
-      (err:any) => {
+      (_err:any) => {
         return [];
       }
     );
