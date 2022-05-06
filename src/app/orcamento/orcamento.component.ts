@@ -3,10 +3,8 @@ import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TokenStorageService } from '../_services/token-storage-service.service';
 import { Router } from '@angular/router';
-import { TableModule } from 'primeng/table';
-import { MenuItem, PrimeIcons } from 'primeng/api';
 import { PieChartData } from '../models/PieChartData';
-import { backgroundColors, hoverColor } from '../constChartColors';
+import { backgroundColors } from '../constChartColors';
 import { Soma } from '../models/Somas';
 
 @Component({
@@ -29,11 +27,11 @@ export class OrcamentoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    await this.orcamentoService.getOrcamentos(this.currentUser.id).subscribe(
+    this.orcamentoService.getOrcamentos(this.currentUser.id).subscribe(
       (data: OrcamentoResponseDTO[]) => {
         this.setOrcamentos(data);
-        
-        return data
+
+        return data;
 
       },
       (err: any) => {
@@ -50,8 +48,8 @@ export class OrcamentoComponent implements OnInit {
     this.tiposDeGastos = [];
     this.valorDeGastos = [];
     this.somas =[];
-    this.gastos.filter(g => (this.tiposDeGastos.push(g.tipo)));
-    this.gastos.filter(g => (this.valorDeGastos.push(g.valor)));
+    this.gastos.forEach(g => (this.tiposDeGastos.push(g.tipo)));
+    this.gastos.forEach(g => (this.valorDeGastos.push(g.valor)));
     this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
     this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
     
@@ -66,7 +64,7 @@ export class OrcamentoComponent implements OnInit {
   }
 
   async delete(orcamentoID: number) {
-    await this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {
+    this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {
       this.orcamentos = this.orcamentos.filter(o => o.id != orcamentoID);
       this.setOrcamentos(this.orcamentos);
     }, err => {
