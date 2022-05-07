@@ -1,5 +1,5 @@
 <div class="col-md-12 center">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card center" />
+    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card center rounded-circle" alt="img-login"/>
     <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
         <div class="form-group">
             <label for="username">Email</label> <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
@@ -31,6 +31,6 @@
             </p>
         </div>
     </form>
-    <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div>
+    <div class="alert alert-success" *ngIf="isLoggedIn">Bem vindo {{currentUser.displayName}}</div>
 
 </div>
