@@ -14,7 +14,7 @@ import { TokenStorageService } from '../_services/token-storage-service.service'
 })
 export class LancamentoComponent implements OnInit {
   currentUser: any;
-  currentMont: number = new Date().getMonth();
+  currentMonth: number = new Date().getMonth();
   currentYear: number = new Date().getFullYear();
   lancamentos: LancamentoResponse[] = [];
   data: LancamentoResponse[] = [];
@@ -32,29 +32,41 @@ export class LancamentoComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     this.route.params.subscribe((params: Params) => this.mesCounter = params['mes']);
     this.mesCounter = this.mesCounter ? this.mesCounter : 0;
-    this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
-      (data: LancamentoResponse[]) => {
-        this.setLancamentos(data);
-        return data;
+    this.currentMonth++
+    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentUser.id, this.currentMonth, this.currentYear).subscribe(
+      (gastos: LancamentoResponse[]) => {
+        this.gastos = gastos;
+        console.log(this.gastos)
+        return gastos;
       },
       (err: any) => {
         return err.error.message;
       }
     );
+    this.lancamentoService.getLancamentosRendaByMonthYear(this.currentUser.id, this.currentMonth, this.currentYear).subscribe(
+      (renda: LancamentoResponse[]) => {
+        this.receitas = renda;
+        return renda;
+      },
+      (err: any) => {
+        return err.error.message;
+      }
+    );
+ 
 
   }
 
   setLancamentos(data: LancamentoResponse[]) {
     this.lancamentos = data;
-    console.log("mes atual: " + this.currentMont);
+    console.log("mes atual: " + this.currentMonth);
     console.log("mes atual: " + this.mesCounter);
     this.lancamentos = this.lancamentos.filter(lancamento => 
-      (new Date(lancamento.data_lacamento).getMonth() == this.currentMont - this.mesCounter % 12)
+      (new Date(lancamento.data_lacamento).getMonth() == this.currentMonth - this.mesCounter % 12)
       && (new Date(lancamento.data_lacamento).getFullYear() == this.currentYear - Math.floor(this.mesCounter/12)));
-
+      
     this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
-
+    
     this.tiposDeGastos = [];
     this.somas = [];
 
@@ -79,8 +91,7 @@ export class LancamentoComponent implements OnInit {
 
   async delete(lancamentoID: number) {
     this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      let lancamentosAux = this.lancamentos.filter(l => l.lancamentoID != lancamentoID);
-      this.setLancamentos(lancamentosAux);
+      this.router.navigate(['/lancamento']);
     }, err => {
       console.log(err);
     });

@@ -20,8 +20,18 @@ const httpOptions = {
     return this.http.get<LancamentoResponse[]>(AppConstants.LANCAMENTO_URL + '/'+userID, httpOptions);
   }
 
+  getLancamentosRendaByMonthYear(userID:number, mes:number, ano:number): Observable<LancamentoResponse[]> {
+    return this.http.get<LancamentoResponse[]>(AppConstants.LANCAMENTO_URL + '/'+userID+'/renda/'+mes+'/'+ano, httpOptions);
+  }
+
+  getLancamentosGastosByMonthYear(userID:number, mes:number, ano:number): Observable<LancamentoResponse[]> {
+    var url = AppConstants.LANCAMENTO_URL + '/'+userID+'/gasto/'+mes+'/'+ano;
+    return this.http.get<LancamentoResponse[]>(url, httpOptions);
+  }
+
   getLancamentoByID(userID:number, lancamentoID:number): Observable<LancamentoResponse> {
-    return this.http.get<LancamentoResponse>(AppConstants.LANCAMENTO_URL + '/'+userID+'/'+lancamentoID, httpOptions);
+    const url = AppConstants.LANCAMENTO_URL + '/' + userID + '/registro/' + lancamentoID;
+    return this.http.get<LancamentoResponse>(url, httpOptions);
   }
  
   postLancamento(userID:number, lancamento:LancamentoRequest): Observable<LancamentoResponse> {
