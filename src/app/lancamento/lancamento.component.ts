@@ -14,7 +14,7 @@ import { TokenStorageService } from '../_services/token-storage-service.service'
 })
 export class LancamentoComponent implements OnInit {
   currentUser: any;
-  currentMont: number = new Date().getMonth();
+  currentMonth: number = new Date().getMonth();
   currentYear: number = new Date().getFullYear();
   lancamentos: LancamentoResponse[] = [];
   data: LancamentoResponse[] = [];
@@ -32,59 +32,74 @@ export class LancamentoComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     this.route.params.subscribe((params: Params) => this.mesCounter = params['mes']);
     this.mesCounter = this.mesCounter ? this.mesCounter : 0;
-    this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
-      (data: LancamentoResponse[]) => {
-        this.setLancamentos(data);
-        return data;
+    this.currentMonth++
+    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentMonth, this.currentYear).subscribe(
+      (gastos: LancamentoResponse[]) => {
+        this.gastos = gastos;
+        this.somas.push({ tipo: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });      
+        return gastos;
+      },
+      (err: any) => {
+        return err.error.message;
+      }
+      );
+      this.lancamentoService.getLancamentosRendaByMonthYear(this.currentMonth, this.currentYear).subscribe(
+        (renda: LancamentoResponse[]) => {
+          this.receitas = renda;
+          this.somas.push({ tipo: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
+        return renda;
       },
       (err: any) => {
         return err.error.message;
       }
     );
 
+    this.lancamentoService.getGastoResumoPorMes(this.currentMonth, this.currentYear).subscribe(
+      (resumo: Soma[])=>{
+        this.tiposDeGastos = resumo;
+        this.piechartdata = {
+          labels: this.tiposDeGastos.map(g => g.tipo),
+          datasets: [
+            {
+              data: this.tiposDeGastos.map(g => g.valor),
+              backgroundColor: backgroundColors
+            }]
+        };
+
+        return resumo;
+      },
+      (err:any)=>{
+        return err.error.message;
+      }
+    );
+ 
+
   }
 
   setLancamentos(data: LancamentoResponse[]) {
     this.lancamentos = data;
-    console.log("mes atual: " + this.currentMont);
+    console.log("mes atual: " + this.currentMonth);
     console.log("mes atual: " + this.mesCounter);
     this.lancamentos = this.lancamentos.filter(lancamento => 
-      (new Date(lancamento.data_lacamento).getMonth() == this.currentMont - this.mesCounter % 12)
+      (new Date(lancamento.data_lacamento).getMonth() == this.currentMonth - this.mesCounter % 12)
       && (new Date(lancamento.data_lacamento).getFullYear() == this.currentYear - Math.floor(this.mesCounter/12)));
-
+      
     this.receitas = this.lancamentos.filter(lancamento => lancamento.isRenda === true);
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
-
+    
     this.tiposDeGastos = [];
     this.somas = [];
 
-    this.tiposDeGastos = Array.from(this.gastos.reduce(
-      (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
-    ), ([descricao, valor]) => ({ descricao, valor }));
-
-    this.somas.push({ descricao: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
-    this.somas.push({ descricao: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
-
-
-    this.piechartdata = {
-      labels: this.tiposDeGastos.map(g => g.descricao),
-      datasets: [
-        {
-          data: this.tiposDeGastos.map(g => g.valor),
-          backgroundColor: backgroundColors
-        }]
-    };
 
   }
 
   async delete(lancamentoID: number) {
-    this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      let lancamentosAux = this.lancamentos.filter(l => l.lancamentoID != lancamentoID);
-      this.setLancamentos(lancamentosAux);
+    this.lancamentoService.deletelancamentos(lancamentoID).subscribe(res => {
+      console.log(res)
+      window.location.reload();
     }, err => {
       console.log(err);
     });
-
   }
 
   novoRegistro() {

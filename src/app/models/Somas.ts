@@ -1,4 +1,4 @@
 export interface Soma{
-    descricao:string;
+    tipo:string;
     valor:number
 }

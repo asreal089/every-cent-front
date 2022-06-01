@@ -51,7 +51,7 @@ export class LancamentoRegistroComponent implements OnInit {
 
 
     if(!(this.lancamentoID === undefined || this.lancamentoID === null || this.lancamentoID === 0)){
-      this.lancamentoService.getLancamentoByID(this.user.id, this.lancamentoID).subscribe((data:LancamentoResponse)=>{
+      this.lancamentoService.getLancamentoByID(this.lancamentoID).subscribe((data:LancamentoResponse)=>{
         this.lancamento.lancamentoID = this.lancamentoID;
         this.lancamento.tipoID = data.tipoID;
         this.lancamento.descricao = data.descricao;
@@ -92,13 +92,13 @@ export class LancamentoRegistroComponent implements OnInit {
 
   salvar(){
     if(this.lancamentoID === undefined || this.lancamentoID === null || this.lancamentoID === 0){
-      this.lancamentoService.postLancamento(this.user.id,this.lancamento).subscribe(res => {     
+      this.lancamentoService.postLancamento(this.lancamento).subscribe(res => {     
         this.router.navigate(['/lancamento']);
       }, err => {
         console.log(err);
       });
     }else{
-      this.lancamentoService.patchLancamento(this.lancamento, this.lancamentoID, this.user.id).subscribe((res)=>{
+      this.lancamentoService.patchLancamento(this.lancamento, this.lancamentoID).subscribe((res)=>{
         this.router.navigate(['/lancamento']);
       },err =>{
         console.log(err);

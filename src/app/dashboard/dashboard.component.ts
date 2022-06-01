@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    this.lancamentoService.getLancamentos(this.currentUser.id).subscribe(
+    this.lancamentoService.getLancamentos().subscribe(
       (data: LancamentoResponse[]) => {
         this.setLancamentos(data)
         return data;
@@ -51,16 +51,16 @@ export class DashboardComponent implements OnInit {
     this.gastos = this.lancamentos.filter(lancamento => lancamento.isRenda === false);
     this.tiposDeGastos = Array.from(this.gastos.reduce(
       (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
-    ), ([descricao, valor]) => ({ descricao, valor }));
+    ), ([tipo, valor]) => ({ tipo, valor }));
     this.tiposDeReceitas = Array.from(this.receitas.reduce(
       (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
-    ), ([descricao, valor]) => ({ descricao, valor }));
+    ), ([tipo, valor]) => ({ tipo, valor }));
 
-    this.somas.push({ descricao: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
-    this.somas.push({ descricao: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
+    this.somas.push({ tipo: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
+    this.somas.push({ tipo: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
 
     this.dataRadar = {
-      labels: this.tiposDeGastos.map(g => g.descricao),
+      labels: this.tiposDeGastos.map(g => g.tipo),
       datasets: [{
         label: 'Gastos',
         data: this.tiposDeGastos.map(g => g.valor),

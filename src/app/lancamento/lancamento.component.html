@@ -1,20 +1,22 @@
 <br />
-    <app-piechart *ngIf="gastos.length >= 1" [data]="piechartdata" ></app-piechart>
-    <br />
-    <p-table *ngIf="receitas.length >= 1" [value]="somas">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Tipo</th>
-                <th>Total</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-soma>
-            <tr>
-                <td>{{soma.descricao}}</td>
-                <td>{{soma.valor}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
+
+        <app-piechart *ngIf="gastos.length >= 1" [data]="piechartdata" ></app-piechart>
+        <p-table *ngIf="receitas.length >= 1" [value]="somas">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Total</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-soma>
+                <tr>
+                    <td>{{soma.tipo}}</td>
+                    <td>{{soma.valor}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br />
+
     <p-table *ngIf="receitas.length >= 1" [value]="receitas">
         <ng-template pTemplate="header">
             <tr>
