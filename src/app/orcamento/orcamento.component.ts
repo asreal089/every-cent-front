@@ -50,8 +50,8 @@ export class OrcamentoComponent implements OnInit {
     this.somas =[];
     this.gastos.forEach(g => (this.tiposDeGastos.push(g.tipo)));
     this.gastos.forEach(g => (this.valorDeGastos.push(g.valor)));
-    this.somas.push({descricao: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
-    this.somas.push({descricao: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
+    this.somas.push({tipo: "Total de receitas",valor : this.receitas.reduce((sum, current) => sum + current.valor, 0)});
+    this.somas.push({tipo: "Total de Gastos",valor : this.gastos.reduce((sum, current) => sum + current.valor, 0)});
     
     this.piechartdata = {
       labels: this.tiposDeGastos,

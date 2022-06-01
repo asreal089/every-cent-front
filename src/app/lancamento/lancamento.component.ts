@@ -33,22 +33,42 @@ export class LancamentoComponent implements OnInit {
     this.route.params.subscribe((params: Params) => this.mesCounter = params['mes']);
     this.mesCounter = this.mesCounter ? this.mesCounter : 0;
     this.currentMonth++
-    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentUser.id, this.currentMonth, this.currentYear).subscribe(
+    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentMonth, this.currentYear).subscribe(
       (gastos: LancamentoResponse[]) => {
         this.gastos = gastos;
-        console.log(this.gastos)
+        this.somas.push({ tipo: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });      
         return gastos;
       },
       (err: any) => {
         return err.error.message;
       }
-    );
-    this.lancamentoService.getLancamentosRendaByMonthYear(this.currentUser.id, this.currentMonth, this.currentYear).subscribe(
-      (renda: LancamentoResponse[]) => {
-        this.receitas = renda;
+      );
+      this.lancamentoService.getLancamentosRendaByMonthYear(this.currentMonth, this.currentYear).subscribe(
+        (renda: LancamentoResponse[]) => {
+          this.receitas = renda;
+          this.somas.push({ tipo: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
         return renda;
       },
       (err: any) => {
+        return err.error.message;
+      }
+    );
+
+    this.lancamentoService.getGastoResumoPorMes(this.currentMonth, this.currentYear).subscribe(
+      (resumo: Soma[])=>{
+        this.tiposDeGastos = resumo;
+        this.piechartdata = {
+          labels: this.tiposDeGastos.map(g => g.tipo),
+          datasets: [
+            {
+              data: this.tiposDeGastos.map(g => g.valor),
+              backgroundColor: backgroundColors
+            }]
+        };
+
+        return resumo;
+      },
+      (err:any)=>{
         return err.error.message;
       }
     );
@@ -70,32 +90,16 @@ export class LancamentoComponent implements OnInit {
     this.tiposDeGastos = [];
     this.somas = [];
 
-    this.tiposDeGastos = Array.from(this.gastos.reduce(
-      (m, { tipo, valor }) => m.set(tipo, (m.get(tipo) || 0) + valor), new Map
-    ), ([descricao, valor]) => ({ descricao, valor }));
-
-    this.somas.push({ descricao: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
-    this.somas.push({ descricao: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });
-
-
-    this.piechartdata = {
-      labels: this.tiposDeGastos.map(g => g.descricao),
-      datasets: [
-        {
-          data: this.tiposDeGastos.map(g => g.valor),
-          backgroundColor: backgroundColors
-        }]
-    };
 
   }
 
   async delete(lancamentoID: number) {
-    this.lancamentoService.deletelancamentos(this.currentUser.id, lancamentoID).subscribe(res => {
-      this.router.navigate(['/lancamento']);
+    this.lancamentoService.deletelancamentos(lancamentoID).subscribe(res => {
+      console.log(res)
+      window.location.reload();
     }, err => {
       console.log(err);
     });
-
   }
 
   novoRegistro() {

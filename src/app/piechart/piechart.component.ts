@@ -14,7 +14,6 @@ export class PiechartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    
   }
   
 

@@ -1,5 +1,5 @@
 <br />
-    <!--
+
         <app-piechart *ngIf="gastos.length >= 1" [data]="piechartdata" ></app-piechart>
         <p-table *ngIf="receitas.length >= 1" [value]="somas">
             <ng-template pTemplate="header">
@@ -10,13 +10,13 @@
             </ng-template>
             <ng-template pTemplate="body" let-soma>
                 <tr>
-                    <td>{{soma.descricao}}</td>
+                    <td>{{soma.tipo}}</td>
                     <td>{{soma.valor}}</td>
                 </tr>
             </ng-template>
         </p-table>
         <br />
-    -->
+
     <p-table *ngIf="receitas.length >= 1" [value]="receitas">
         <ng-template pTemplate="header">
             <tr>
