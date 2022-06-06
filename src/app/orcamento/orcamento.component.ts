@@ -27,7 +27,7 @@ export class OrcamentoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
-    this.orcamentoService.getOrcamentos(this.currentUser.id).subscribe(
+    this.orcamentoService.getOrcamentos().subscribe(
       (data: OrcamentoResponseDTO[]) => {
         this.setOrcamentos(data);
 
@@ -64,7 +64,7 @@ export class OrcamentoComponent implements OnInit {
   }
 
   async delete(orcamentoID: number) {
-    this.orcamentoService.deleteOrcamentos(this.currentUser.id, orcamentoID).subscribe(res => {
+    this.orcamentoService.deleteOrcamentos(orcamentoID).subscribe(res => {
       this.orcamentos = this.orcamentos.filter(o => o.id != orcamentoID);
       this.setOrcamentos(this.orcamentos);
     }, err => {
