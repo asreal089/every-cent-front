@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { FormBuilder, NgForm } from "@angular/forms";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder } from "@angular/forms";
 import { TipoLancamento } from '../models/TipoLancamento';
 import { OrcamentoService } from '../_services/orcamento.service';
 import { TipoLancamentoService } from '../_services/tipo-lancamento.service';
@@ -43,7 +43,7 @@ export class OrcamentoNovoComponent implements OnInit {
     this.orcamento.userID = this.user.id;
 
     if(!(this.orcamentoID === undefined || this.orcamentoID === null || this.orcamentoID === 0)){
-      this.orcamentoService.getOrcamentoByID(this.user.id, this.orcamentoID).subscribe((data:OrcamentoResponseDTO)=>{
+      this.orcamentoService.getOrcamentoByID(this.orcamentoID).subscribe((data:OrcamentoResponseDTO)=>{
         this.orcamento.tipoID = data.tipo_id;
         this.orcamento.valor_maximo= data.valor;
       });
