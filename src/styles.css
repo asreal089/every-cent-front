@@ -74,21 +74,5 @@
 .btn-primary{
   color: var(--background-light)!important;
   background-color: var(--background-default)!important;
+  border-color: var(--background-default)!important;
 }
-/*
-.tabviewpanel {
-  padding: 10px;
-}
-
-.tabviewpanel li a {
-  padding: 10px;
-  text-decoration: none;
-  color: var(--secudary-default);
-}
-.tabviewpanel li a:hover {
-  color: var(--secudary-dark);
-}
-.card th {
-  background-color: var(--primary-light);
-}
-*/

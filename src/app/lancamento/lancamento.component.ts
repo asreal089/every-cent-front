@@ -33,7 +33,7 @@ export class LancamentoComponent implements OnInit {
     this.route.params.subscribe((params: Params) => this.mesCounter = params['mes']);
     this.mesCounter = this.mesCounter ? this.mesCounter : 0;
     this.currentMonth++
-    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentMonth, this.currentYear).subscribe(
+    this.lancamentoService.getLancamentosGastosByMonthYear(this.currentMonth - this.mesCounter, this.currentYear).subscribe(
       (gastos: LancamentoResponse[]) => {
         this.gastos = gastos;
         this.somas.push({ tipo: "Total de Gastos", valor: this.gastos.reduce((sum, current) => sum + current.valor, 0) });      
@@ -43,7 +43,7 @@ export class LancamentoComponent implements OnInit {
         return err.error.message;
       }
       );
-      this.lancamentoService.getLancamentosRendaByMonthYear(this.currentMonth, this.currentYear).subscribe(
+      this.lancamentoService.getLancamentosRendaByMonthYear(this.currentMonth - this.mesCounter, this.currentYear).subscribe(
         (renda: LancamentoResponse[]) => {
           this.receitas = renda;
           this.somas.push({ tipo: "Total de receitas", valor: this.receitas.reduce((sum, current) => sum + current.valor, 0) });
@@ -54,7 +54,7 @@ export class LancamentoComponent implements OnInit {
       }
     );
 
-    this.lancamentoService.getGastoResumoPorMes(this.currentMonth, this.currentYear).subscribe(
+    this.lancamentoService.getGastoResumoPorMes(this.currentMonth - this.mesCounter, this.currentYear).subscribe(
       (resumo: Soma[])=>{
         this.tiposDeGastos = resumo;
         this.piechartdata = {
@@ -104,6 +104,16 @@ export class LancamentoComponent implements OnInit {
 
   novoRegistro() {
     this.router.navigate(['/lancamento/registro']);
+  }
+  subMes() {
+    this.mesCounter++;
+    this.router.navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/lancamento/mes/' ,this.mesCounter]));
+  }
+  addMes() {
+    this.mesCounter--;
+    this.router.navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/lancamento/mes/' ,this.mesCounter]));
   }
 
   editRegistro(lancamnetoID: number) {
