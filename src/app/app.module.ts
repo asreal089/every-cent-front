@@ -64,7 +64,7 @@ import { authInterceptorProviders } from './login/authinterceptor';
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: '', component: LandingpageComponent},
       {path: 'lancamento', component: LancamentoComponent, canActivate: [AuthGuard] },
-      {path: 'lancamento/mes/:mes', component: LancamentoComponent, canActivate: [AuthGuard] },
+      {path: 'lancamento/mes/:mes/:ano', component: LancamentoComponent, canActivate: [AuthGuard] },
       {path: 'lancamento/registro', component: LancamentoRegistroComponent, canActivate: [AuthGuard] },
       {path: 'lancamento/registro/:lancamentoID', component: LancamentoRegistroComponent, canActivate: [AuthGuard] },
       {path: 'orcamento', component: OrcamentoComponent, canActivate: [AuthGuard]},
