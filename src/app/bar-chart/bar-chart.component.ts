@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RadarChartData } from '../models/RadarChartData';
-
+import { BarchartConfig } from '../models/BarchartConfig';
+import { BarchartData } from '../models/BarchartData';
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
@@ -8,7 +8,7 @@ import { RadarChartData } from '../models/RadarChartData';
 })
 export class BarChartComponent implements OnInit {
 
-  @Input() data: RadarChartData = {labels: [], datasets :[] };
+  @Input() data: BarchartConfig = {labels: [], datasets: [] };
 
   constructor() { }
 
