@@ -6,6 +6,7 @@ import { BarchartData } from '../models/BarchartData';
 import { LancamentoResponse } from '../models/LancamentoResponse';
 import { OrcamentoResponseDTO } from '../models/OrcamentoResponseDTO';
 import { RadarChartData } from '../models/RadarChartData';
+import { SomaGastoOrcamento } from '../models/SomaGastoOrcamento';
 import { Soma } from '../models/Somas';
 import { LancamentoService } from '../_services/lancamento.service';
 import { OrcamentoService } from '../_services/orcamento.service';
@@ -30,8 +31,18 @@ export class DashboardComponent implements OnInit {
   tiposDeReceitas: Soma[] = [];
   orcamentos: OrcamentoResponseDTO[] = [];
   somas: Soma[] = [];
+  somaGastoOrcamento: SomaGastoOrcamento[] = [];
   dataRadar: RadarChartData = {labels:[], datasets:[]};
   dataBar: BarchartConfig = {};
+  chartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
   
 
   constructor(private router: Router, private lancamentoService: LancamentoService, private orcamentoService:OrcamentoService, private tokenStorage: TokenStorageService) { }
@@ -44,6 +55,16 @@ export class DashboardComponent implements OnInit {
         return data;
       },
       (err: any) => {
+        return err.error.message;
+      }
+    );
+
+    this.lancamentoService.getGastoVOrcamentoResumoPorMes(this.currentMont, this.currentYear).subscribe(
+      (data: SomaGastoOrcamento[])=>{
+        this.somaGastoOrcamento = data;
+        return data;
+      },
+      (err:any)=>{
         return err.error.message;
       }
     );
@@ -88,24 +109,18 @@ export class DashboardComponent implements OnInit {
         fill: true
       }]
     };
-
-    this.orcamentos = this.orcamentos.filter(e => !e.is_renda);
-    this.orcamentos.sort((a, b) => a.tipo.localeCompare(b.tipo));
-    this.tiposDeGastos.sort((a,b) => a.tipo.localeCompare(b.tipo))
-
-    console.log(this.orcamentos)
-    console.log(this.tiposDeGastos)
+   
 
 
     this.dataBar = {
-      labels: this.tiposDeGastos.map(g => g.tipo),
+      labels: this.somaGastoOrcamento.map(g => g.tipo),
       datasets: [{
         label: 'Gastos',
-        data: this.tiposDeGastos.map(g => g.valor),
+        data: this.somaGastoOrcamento.map(g => g.valorGasto),
         backgroundColor: "#4A148C"
       },{
         label: 'Orçamento',
-        data: this.orcamentos.map(g => g.valor),
+        data: this.somaGastoOrcamento.map(g => g.valorOrcamento),
         backgroundColor: "#6A1B9A"
       }]
     };

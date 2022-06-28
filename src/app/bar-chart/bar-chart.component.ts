@@ -9,6 +9,7 @@ import { BarchartData } from '../models/BarchartData';
 export class BarChartComponent implements OnInit {
 
   @Input() data: BarchartConfig = {labels: [], datasets: [] };
+  @Input() options: any = {chartOptions: []};
 
   constructor() { }
 

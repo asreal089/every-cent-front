@@ -5,6 +5,7 @@ import { LancamentoRequest } from '../models/LancamentoRequest';
 import { Soma } from '../models/Somas';
 import { AppConstants } from '../app.constants';
 import { Observable } from 'rxjs';
+import { SomaGastoOrcamento } from '../models/SomaGastoOrcamento';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -49,6 +50,11 @@ export class LancamentoService {
   getGastoResumoPorMes(mes: number, ano: number){
     const url = AppConstants.LANCAMENTO_URL + '/resumo/gasto/'+mes+'/'+ano
     return this.http.get<Soma[]>(url, httpOptions);
+  }
+
+  getGastoVOrcamentoResumoPorMes(mes: number, ano: number){
+    const url = AppConstants.LANCAMENTO_URL + '/resumo/gasto-orcamento/'+mes+'/'+ano
+    return this.http.get<SomaGastoOrcamento[]>(url, httpOptions);
   }
 
   postLancamento(
