@@ -25,7 +25,6 @@ import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { OrcamentoNovoComponent } from './orcamento-novo/orcamento-novo.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -49,7 +48,6 @@ import { authInterceptorProviders } from './login/authinterceptor';
     OrcamentoComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent,
     OrcamentoNovoComponent,
     LancamentoRegistroComponent,
     BarChartComponent,
@@ -71,7 +69,6 @@ import { authInterceptorProviders } from './login/authinterceptor';
       {path: 'orcamento/novo', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'orcamento/novo/:orcamentoID', component: OrcamentoNovoComponent, canActivate:[AuthGuard]},
       {path: 'login', component: LoginComponent},
-      {path: 'signin', component: RegisterComponent}
     ]),
     FormsModule,
     CalendarModule,
