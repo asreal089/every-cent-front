@@ -16,8 +16,9 @@ const newLocal = ['lançamentos', 'orçamento'];
 export class DashboardComponent implements OnInit {
 
   currentUser: any;
-  currentMont: number = new Date().getMonth();
+  currentMont: number = (new Date().getMonth()) + 1;
   currentYear: number = new Date().getFullYear();
+
 
   somaGastoOrcamento: SomaGastoOrcamento[] = [];
   dataRadar: RadarChartData = {labels:[], datasets:[]};
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUser = this.tokenStorage.getUser();
+
 
     this.lancamentoService.getGastoVOrcamentoResumoPorMes(this.currentMont, this.currentYear).subscribe(
       (data: SomaGastoOrcamento[])=>{
