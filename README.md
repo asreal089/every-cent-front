@@ -3,6 +3,18 @@
 Esse é um projeto em angular front end da aplicação de controle de gastos.
 A api desse projeto pode ser encontrada no projeto [every-cent-api](https://github.com/asreal089/every-cent-api)
 
+## A stack da applicação:
+
+<img align="center" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"/>
+<img align="center" src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
+<img align="center" src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
+
+
+## Demo:
+
+![Crie lançamento e orçamento](https://github.com/asreal089/every-cent-front/blob/main/assets/demo1.gif)
+![Visualize dashboard](https://github.com/asreal089/every-cent-front/blob/main/assets/demo2.gif)
+
 ## Development server
 
 Para rodar o projeto basta usar o comando:
