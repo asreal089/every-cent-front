@@ -11,7 +11,7 @@
         <ng-template pTemplate="body" let-soma>
             <tr>
                 <td>{{soma.tipo}}</td>
-                <td>{{soma.valor}}</td>
+                <td>{{soma.valor | currency:'BRL':true:'1.2-2' }}</td>
             </tr>
         </ng-template>
     </p-table>
@@ -26,7 +26,7 @@
         <ng-template pTemplate="body" let-receita>
             <tr>
                 <td>{{receita.tipo}}</td>
-                <td>{{receita.valor}}</td>
+                <td>{{receita.valor | currency:'BRL':true:'1.2-2' }}</td>
                 <td>
                     <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.id)"></button>
                     

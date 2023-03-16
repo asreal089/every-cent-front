@@ -1,6 +1,7 @@
 <br />
-
+  
     <app-piechart *ngIf="gastos.length >= 1" [data]="piechartdata" ></app-piechart>
+
     <span style="padding-bottom: 5px;">
         <button class="btn btn-primary pi pi-arrow-left" value="Primary" (click)="subMes()"></button>
         <button value="Primary" class="btn btn-primary pi pi-arrow-right" style="float: right;" (click)="addMes()"></button>
@@ -14,8 +15,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-soma>
             <tr>
-                <td>{{soma.tipo}}</td>
-                <td>{{soma.valor}}</td>
+                <td>{{soma.tipo | currency:'BRL':true:'1.2-2' }}</td>
+                <td>{{soma.valor | currency:'BRL':true:'1.2-2' }}</td>
             </tr>
         </ng-template>
     </p-table>
@@ -36,7 +37,7 @@
                 <td>{{receita.tipo}}</td>
                 <td>{{receita.descricao}}</td>
                 <td>{{receita.data_lacamento|date}}</td>
-                <td>{{receita.valor}}</td>
+                <td>{{receita.valor | currency:'BRL':true:'1.2-2' }}</td>
                 <td>
                     <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(receita.lancamentoID)"></button>
                     
@@ -61,7 +62,7 @@
                 <td>{{gasto.tipo}}</td>
                 <td>{{gasto.descricao}}</td>
                 <td>{{gasto.data_lacamento|date}}</td>
-                <td>{{gasto.valor}}</td>
+                <td>{{gasto.valor | currency:'BRL':true:'1.2-2' }}</td>
                 <td>
                     <button class="btn pi pi-trash " style="font-size: 1rem" (click)="delete(gasto.lancamentoID)"></button>
                     
