@@ -23,7 +23,5 @@ export class LandingpageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  signin() {
-    this.router.navigate(['/signin']);
-  }
+
 }
