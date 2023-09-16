@@ -21,9 +21,9 @@ Para rodar o projeto basta usar o comando:
 ```
  ng serve
 ```
-
+Construido com Angular 12, deve ser usado node version 12.22.12
 Algumas rotas estão configuradas no arquivo `app.constants.ts`.
-Caso queira usar as configuração padrões o rpojeto deve ser rodado na porta 8081. Para isso use:
+Caso queira usar as configuração padrões o projeto deve ser rodado na porta 8081. Para isso use:
 
 ```
 ng serve --port 8081
